@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './SearchBar.css';
-// import store from '../../store/index';
-// import { connect } from 'react-redux';
-// import { search } from '../../actions/index';
+import store from '../../store/index';
 
 export class SearchBar extends Component{
 
@@ -25,8 +23,7 @@ export class SearchBar extends Component{
     }
 
     handleSubmit(event){
-        event.preventDefault();  
-  //      this.props.search();  
+        event.preventDefault();    
     }
 
 
@@ -74,25 +71,5 @@ export class SearchBar extends Component{
             
     }
 }
-
-// function mapStateToProps(state) {
-//     return {
-//     //Asi es como queremos recibir los elementos del store
-// //    count: state.count
-//     };
-// }
-
-// function mapDispatchToProps(dispatch) {
-//     return {
-//     //Las funcionalidades que este componente aplicaran al store
-//     search: () => dispatch(search()),
-//     };
-// }
-// export default connect(
-//     // mapStateToProps,
-//     //mapDispatchToProps
-// )(SearchBar);
-
-
 
 export default SearchBar;

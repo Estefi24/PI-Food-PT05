@@ -1,0 +1,84 @@
+.detail {
+    margin: 0;
+    background-color: rgb(54, 6, 38);
+    width: 100%;
+    height: auto;
+    position: absolute;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.detail button{
+    margin-top: 5%;
+    margin-left: 7%;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 7px;
+    background-color: rgb(77, 50, 77); 
+    color:white;
+}
+
+.detail button:hover{
+    background-color:rgb(85, 63, 85);
+    color:white;
+}
+
+.detail h1{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    font-size: 50px;
+    font-style:italic;
+    font-family: 'Times New Roman', Times, serif;
+    background-image: url('https://images.unsplash.com/photo-1495195129352-aeb325a55b65?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1510&q=80'); 
+
+}
+
+.detail img{
+    width: 300px;
+    height: 300px;
+    margin-left: 39%;
+}
+
+.titulos h3{
+    display: flex;
+    justify-content: center;
+    color:white;
+    padding: 10px;
+    margin-left: 35%;
+    margin-right: 35%;
+    background-color: black;
+    box-shadow: 2px 2px 2px 2px rgb(93, 92, 92);
+}
+
+.titulos h2{
+    display: flex;
+    justify-content: center;
+    color:white;
+    padding: 10px;
+    margin-left: 30%;
+    margin-right: 30%;
+    background-color: black;
+    box-shadow: 2px 2px 2px 2px rgb(93, 92, 92);
+}
+
+.items h3{
+    margin-left: 5%;
+    color:white;
+}
+
+.items p{
+    margin-left: 17%;
+    margin-right: 17%;
+    background-color:  rgba(197, 185, 185, 0.8);
+    padding: 2%;
+}
+
+.items ul{
+    margin-left: 17%;
+    margin-right: 17%;
+    background-color:  rgba(195, 169, 189, 0.8);
+    padding: 2%;
+}

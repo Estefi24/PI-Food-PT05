@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 import './/RecipeCreate.css'
 
 class RecipeCreate extends React.Component {
@@ -54,16 +55,39 @@ class RecipeCreate extends React.Component {
 
     render() {
         return (
-            <div className ='recipeCreateContainer padding-top-box'>
+            <div className='create'>
+            <div className='buttonHome'>
+                <Link to='/home'><button>Create Recipe</button></Link>
+                <h1>Upload your own recipe!!</h1>
+            </div>
+            <div className='form'>
                 <form action="" className ='recipeCreateForm' onSubmit={this.handleSubmit}>
+                    <div className='form-group'>
                     <input type="text" name="title" placeholder="Name" onChange={this.handleChange} value={this.state.recipe.title}/>
+                    </div>
+                    <div className='form-group'>
                     <input type="text" name="summary" placeholder="Summary" onChange={this.handleChange} value={this.state.recipe.summary}/>
+                    </div>
+                    <div className='form-group'>
                     <input type="number" name="aggregateLikes" placeholder="AggregateLikes" onChange={this.handleChange} value={this.state.recipe.aggregateLikes} />
+                    </div>
+                    <div className='form-group'>
                     <input type="number" name="healthScore" placeholder="HealthScore" onChange={this.handleChange} value={this.state.recipe.healthScore}/>
+                    </div>
+                    <div className='form-group'>
                     <input type="text" name="steps" placeholder="Steps" onChange={this.handleChange} value={this.state.recipe.steps}/>
+                    </div>
+                    <div className='form-group'>
                     <input type="text" name="diets" placeholder="Diets" onChange={this.handleChange} value={this.state.recipe.diets}/>
-                    <button type="submit" id='recipeCreateSubmit'> Create Recipe</button>
+                    </div>
+                    <div className='buttonCreate'>
+                    <button type='reset' form='general'>Create another recipe</button>
+                    </div>
+                    <div className='buttonSave'>
+                    <button type='submit' >Save recipe</button>
+                    </div>
                 </form>
+                </div>
             </div>
         )
     }}

@@ -72,6 +72,13 @@ router.get('/recipes', async (req, res, next) => {
     }
 });
 
+router.get('/recipes/detail:id', async (req, res, next) => {
+    axios.get(`https://api.spoonacular.com/recipes/${req.params.id}/information?apiKey=${apiKey}`).then((response) => {
+        res.json(response.data);
+        })
+});
+
+
 router.get('/recipes/:id', async (req, res, next) => {
     const idReceta = req.params.id;
     try{

@@ -1,15 +1,24 @@
-.button{
+ul{
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    list-style: none;
+    
 }
 
-.button button{    
-    border-radius: 100%;
-    padding: 13px;
-
+.button{
+    padding: 1rem;
+}
+span{
+    color: rgb(245, 244, 244);
+    padding: 7px;
+    background: rgb(53, 50, 50);
+    margin: 2px;
+    font-weight: 600;
+    border-radius:50%;
+    cursor: pointer;
 }
 
-.button button:hover{
-    color:white;
+span:hover{
+    color: black;
+    background-color: blanchedalmond;
 }

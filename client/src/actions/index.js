@@ -1,79 +1,79 @@
-import axios from 'axios';
+import axios from  'axios';
 
-export function addSearch( search ) {
-    return function(dispatch) {
+export function addSearch( search){
 
-  return axios.get('/food/recipes').then(res => {
-    console.log(Array.isArray(res.data));
-    let recipesReturn = [];
+  
 
-  //Aqui iran los filtros
-  console.log(search.search);
+  return function(dispatch) {
+
+    return axios.get('/food/recipes').then(res => {
+
+      let recipesReturn = [];
+
+   //Filtros
+    if(search){
+
+    console.log('Deberia estar el searchHealthScore' , search.orderByhealthScore);
+
     if(search.search.lenght !== 0){
-        recipesReturn = res.data.filter(result => result.title.toLowerCase().includes(search.search.toLowerCase()));
-
+      recipesReturn = res.data.filter(result =>  result.title.includes(search.search));
     }else{
       recipesReturn = res.data;
-
     }
 
+    //Si es distinto a all , filtra por dieta
     if(search.typeDiet !== 'all'){
-      recipesReturn = recipesReturn.filter(result => result.diets.includes(search.typeDiet));
-
+      recipesReturn = recipesReturn.filter( result => result.diets.includes(search.typeDiet) );
+    }else{
+      recipesReturn = recipesReturn;
     }
 
-  if(search.order === 'asc'){
-    recipesReturn.sort(function(a,b){
-      if(a.title > b.title){
-        return 1;
-      }
-      if(a.title < b.title){
-        return -1;
-      }
-      return 0;
-    });
-    }else if (search.order === 'desc'){ 
-      recipesReturn.sort(function(a,b){
-        if(a.title > b.title){
-          return -1;
+    //------------------------------------------------------------------
+    if(search.orderByAlphabetical !== 'none'){
+      if(search.orderByAlphabetical === 'ascend'){
+        console.log('Ordenando por ascendente' ,console.log(search.orderByAlphabetical))
+        recipesReturn = recipesReturn.sort((a, b) => a.title.localeCompare(b.title));
+      }else{
+        console.log('Ordenando por descendente' ,console.log(search.orderByAlphabetical))
+            recipesReturn = recipesReturn.sort((a, b) => b.title.localeCompare(a.title));
+          }
         }
-        if(a.title < b.title){
-          return 1;
-        }
-        return 0;
-      });
 
-      if(search.orderBy === 'max'){
-        recipesReturn.sort(function(a,b){
-          if(a.title > b.title){
+    //------------------------------------------------------------------
+    if(search.orderByhealthScore !== 'none'){
+      if( search.orderByhealthScore === 'min' ){
+        recipesReturn.sort(function (a, b) {
+          if ( a.healthScore > b.healthScore ) {
             return 1;
           }
-          if(a.title < b.title){
+          if (a.healthScore < b.healthScore) {
             return -1;
           }
+          // a must be equal to b
           return 0;
-        });
+        })
 
-        if(search.orderBy === 'min'){
-          recipesReturn.sort(function(a,b){
-            if(a.aggregateLikes < b.aggregateLikes){
-              return 1;
-            }
-            if(a.aggregateLikes > b.aggregateLikes){
-              return -1;
-            }
-            return 0;
-          });
-        }
+      }else if( search.orderByhealthScore === 'max' ){
+        recipesReturn.sort(function (a, b) {
+          if (a.healthScore < b.healthScore) {
+            return 1;
+          }
+          if (a.healthScore > b.healthScore) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+        })
       }
-    }
+  }
+  }else{
+    recipesReturn = res.data;
+  }
 
-  //Aqui haremos el dispatch
-    dispatch({ type: "SEARCH", payload: recipesReturn });
-  
-  
-  });
-  };
+  //Distpatch
+  dispatch({ type: "SEARCH", payload:  recipesReturn});
+  })
 
   }
 
+}

@@ -12,34 +12,48 @@ export class SearchBar extends Component{
 
         this.state = {
             search: '',
-            // orderRecipe:'rice',
-            typeDiet:'all',
-            orderBy:'score',
-            order: 'alpha'
+            typeDiet: 'all',
+            orderByAlphabetical: 'none',
+            orderByhealthScore: 'none',
 
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        // this.handleOnClick = this.handleOnClick.bind(this);
         this.listRef = React.createRef()
     
     }
 
     handleChange(event){
         this.setState({[event.target.name]: event.target.value});
-    };
+    }
 
     handleSubmit(event){
-        event.preventDefault();
+        event.preventDefault(); 
         this.props.addSearch(
             {
-            search: this.state.search, 
-            order: this.state.order, 
-            orderBy: this.state.orderBy, 
-            // orderRecipe: this.state.orderRecipe, 
-            typeDiet: this.state.typeDiet
-        }
+            search:this.state.search ,
+            typeDiet:this.state.typeDiet , 
+            orderByAlphabetical: this.state.orderByAlphabetical,
+            orderByhealthScore: this.state.orderByhealthScore
+            }
         );
     }
+
+    // componentDidMount(){
+    //     this.props.addSearch(
+    //         {
+    //             search: '',
+    //             typeDiet: '',
+    //             orderByhealthScore: '',
+    //             orderByAlphabetical: ''
+    //         }
+    //     );
+    // }
+
+    // handleOnClick (e){
+    //     e.preventDefault();
+    // }
 
 
     render(){
@@ -49,13 +63,17 @@ export class SearchBar extends Component{
             <form onSubmit={this.handleSubmit}>
             <div className='searchContainer padding-top-box'>
                 <div className='searchContainerRow'>
+                    <input type='text' name='search' onChange={this.handleChange} value= {this.state.search} className='searchFormInput' placeholder='Search by recipe name' />
+                    <input type='submit' value='Search' className='searchFormSubmit' />
+                </div>
+                <div className='searchContainerRow'>
                     {/* <select name='orderRecipe' id='orderRecipe' onChange={this.handleChange} value= {this.state.orderRecipe} className='searchFormSelect' defaultValue={'None'}>
                         <option value={'total'}>Total Recipes</option>
                         <option value={'rice'}>Recipes Created</option>
                         <option value={'rice'}>Recipes Api</option>
                     </select> */}
-                    <select name='typeDiet' id='typeDiet' onChange={this.handleChange} value= {this.state.typeDiet} className='searchFormSelect' defaultValue={'None'}>
-                        <option value={'all'}>All</option>
+                    <select name='typeDiet' id='typeDiet' onChange={this.handleChange} value= {this.state.typeDiet} className='searchFormSelect' >
+                        <option value={'all'}>All Recipes</option>
                         <option value={'gluten free'}>gluten free</option>
                         <option value={'dairy free'}>dairy free</option>
                         <option value={'lacto ovo vegetarian'}>lacto ovo vegetarian</option>
@@ -67,21 +85,21 @@ export class SearchBar extends Component{
                         <option value={'ketogenic'}>ketogenic</option>
                         <option value={'fodmap friendly'}>fodmap friendly</option>
                     </select>
-                    <select name='order' id='order' onChange={this.handleChange} value= {this.state.order} className='searchFormSelect' defaultValue={'None'}>
-                        <option value={'alpha'}>Alphabetical Order</option>
-                        <option value={'asc'}>Asc</option>
-                        <option value={'desc'}>Desc</option>
+                    <select name='orderByAlphabetical' id='orderByAlphabetical' onChange={this.handleChange} value= {this.state.orderByAlphabetical} className='searchFormSelect' >
+                        <option value={'none'}>Order Alphabetical </option>
+                        <option value={'ascend'}>Asc</option>
+                        <option value={'descend'}>Desc</option>
                     </select>
-                    <select name='orderBy' id='orderBy' onChange={this.handleChange} value= {this.state.orderBy} className='searchFormSelect' defaultValue={'None'}>
-                        <option value={'score'}>Score</option>
+                    <select name='orderByhealthScore' id='orderByhealthScore' onChange={this.handleChange} value= {this.state.orderByhealthScore} className='searchFormSelect' >
+                        <option value={'none'}>Order by Score</option>
                         <option value={'max'}>Max Score</option>
                         <option value={'min'}>Min Score</option>
                     </select>
                 </div>
-                <div className='searchContainerRow'>
-                    <input type='text' name='search' onChange={this.handleChange} value= {this.state.search} className='searchFormInput' placeholder='Search by recipe name' />
-                    <input type='submit' value='Search' className='searchFormSubmit' />
-                </div>
+                
+                {/* <div className='todos'>
+                <button onClick={this.handleOnClick}>Show all recipes</button>
+                </div> */}
             </div>
             </form>
         )

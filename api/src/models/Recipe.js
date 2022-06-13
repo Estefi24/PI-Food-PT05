@@ -6,7 +6,7 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      allowNull: false,
+      // allowNull: false,
       primaryKey: true    
     },
     title: {
@@ -24,7 +24,7 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
-    steps:{
+    analizedInstructions:{
       type: DataTypes.TEXT,
       allowNull: true,
     },

@@ -6,7 +6,7 @@ import { addSearch } from "../actions/index";
 
 //InitialState contiene las mismas propiedades que el store
 const initialState = {
-    recipes: {}
+    recipes: [{}]
 };
 
 function rootReducer(state = initialState, action) {
@@ -16,23 +16,11 @@ function rootReducer(state = initialState, action) {
         case 'SEARCH': {
 //Cambiamos las propiedades del stado
             console.log(action.payload)
-            return {...state, recipes: action.payload}
+            return {recipes: action.payload}
         }break;
         default: {
             return state;
         }
-        // case 'ORDERRECIPE': {  
-        //     return {...state, recipes: action.payload}
-        // }break;
-        // case 'ORDER' : {
-        //     return {...state, recipes: action.payload}
-        // }break;
-        // case 'ORDERBY': {
-        //     return {...state, recipes: action.payload}
-        // }break;
-        // case 'TYPEDIET': {
-        //     return {...state, recipes: action.payload}
-        // }break;
     }
     
     }

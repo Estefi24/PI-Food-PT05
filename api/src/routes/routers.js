@@ -8,7 +8,7 @@ const router = Router();
 const getApiInfo = async () => {
     const apiKey = process.env.YOUR_API_KEY;
     const apiUrl = await axios.get(
-        `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&addRecipeInformation=true&number=100`);	
+        `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&addRecipeInformation=true&number=50`);	
 const apiInfo = await apiUrl.data.results.map(d => {
         return {
             id: d.id, 
@@ -36,13 +36,14 @@ const getDbInfo = async () => {
 const dbInfo= await db?.map(d => {
         return {
         id: d.id,
+        image: d.image,
         title: d.title,
         dishTypes: d.dishTypes,
         diets: d.diets?.map(diet => diet.name),
         summary: d.summary,
         aggregateLikes: d.aggregateLikes,
         healthScore: d.healthScore,
-        steps: d.steps
+        analizedInstructions: d.analizedInstructions
     };
 });
         return dbInfo;
@@ -72,11 +73,13 @@ router.get('/recipes', async (req, res, next) => {
     }
 });
 
-router.get('/recipes/detail:id', async (req, res, next) => {
-    axios.get(`https://api.spoonacular.com/recipes/${req.params.id}/information?apiKey=${apiKey}`).then((response) => {
-        res.json(response.data);
-        })
-});
+// router.get('/recipes/detail:id', async (req, res, next) => {
+//     axios.get(`https://api.spoonacular.com/recipes/${req.params.id}/information?apiKey=${apiKey}`).then((response) => {
+//     console.log(response.data);
+
+//     res.json(response.data);
+//         })
+// });
 
 
 router.get('/recipes/:id', async (req, res, next) => {
@@ -96,7 +99,7 @@ router.get('/recipes/:id', async (req, res, next) => {
 
 router.get('/types', async (req, res, next) => {
     try{
-    const dietType = await Diet.findAll();
+        const dietType = await Diet.findAll();
         res.status(200).json(dietType)
     }catch(err){
         next(err)
@@ -104,23 +107,33 @@ router.get('/types', async (req, res, next) => {
 });
 
 router.post('/recipe', async (req, res) => {
-    const { title, summary, aggregateLikes, healthScore, steps, createdInDb, diets } = req.body;
+    console.log('holaaaa')
+    console.log(req.body);
+    const { title, summary, aggregateLikes, healthScore, analizedInstructions, diets } = req.body;
+    // if (req.body.diets) {
+    //     const diets = req.body.diets
+
+    // } else {
+    //     const diets = []
+    // }
 
     const recipeCreated = await Recipe.create({
         title,
-        summary,
+        summary,    
         aggregateLikes,
         healthScore,
-        steps,
-        createdInDb,
-        });
+        analizedInstructions
+
+    });
 
     let dietDb = await Diet.findAll({ where: {name: diets} })
 
     recipeCreated.addDiet(dietDb)
     res.status(200).send('Receta creada exitosamente')
 
-    });
+    // res.status(202).send('mensaje de prueba')
+
+});
 
 
 module.exports = router;

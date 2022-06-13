@@ -11,6 +11,9 @@
     background-size: cover;
 }
 
+.typesInput {color:black
+}
+
 .create button{
     background-color:  rgba(240, 228, 236, 0.712);
     border-bottom-left-radius: 5px;
@@ -95,11 +98,11 @@
 
 .buttonCreate{
     float: left;       
-    margin-left: -50px;
+    margin-left: 50px;
     margin-right: 20px;
-    margin-block-start: 20px;
+    margin-block-start: 30px;
 }
 
-.buttonSave{
+/* .buttonSave{
     margin-block-start: 20px;
-}
+} */

@@ -1,130 +1,88 @@
-/* eslint-disable no-lone-blocks */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
-//Import store
-// import store from '../../store';
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
+import React, { useState , useEffect } from 'react';
 //Importar el connect
-import {connect} from 'react-redux';
-import axios from 'axios';
-// import './List.css';
+import {connect , useDispatch, useSelector} from 'react-redux';
+//Importar link
+import { Link } from "react-router-dom";
+import { addSearch } from '../../actions';
+
+import Resultado from '../Resultado/Resultado';
+import Paginado from '../Paginado/Paginado';
 
 
-class List extends React.Component{
+export function List(props) {
+    const [recipes, setRecipes] = useState();
+    const dispatch = useDispatch();
+    const allRecipes = useSelector( (state) =>  state.recipes  );
+    const [currentPage , setCurrentPage] = useState(1);
+    const [recipesPerPage , setRecipesPerPage] = useState(9);
+    const indexOfLastOfRecipe = currentPage * recipesPerPage;
+    const indexOfFirstOfRecipe = indexOfLastOfRecipe - recipesPerPage;
+    const currentRecipes  = allRecipes.slice(indexOfFirstOfRecipe , indexOfLastOfRecipe);
 
-    constructor(props){
-        super(props);
-        this.state = {recipes: {  } }
-        this.listRef = React.createRef()
-    }
-
-    
-    componentWillMount(){
-        axios.get('/recipes').then(res => {this.setState({recipes: res.data })});
-        console.log(this.props);
-        console.log('Hey estoy aca')
-
-    }
-
-    componentDidUpdate(){
-        this.setState({ recipes: this.props.recipes });
-        console.log('Hey me actualize ahora');
-        console.log(this.props.recipes)
+    const paginado = (pageNumber) => {
+        setCurrentPage(pageNumber);
     }
     
+	const previous = function () {
+        setCurrentPage(currentPage - 1);
+	};
+
+    const next = function () {
+        setCurrentPage(currentPage + 1);
+	};
 
 
-    render(){
-        // if(this.props.recipes.length === 0){
-            // this.props.recipes.map(recipe => {
+    useEffect(() => {
+        dispatch(addSearch())
         
-        return(
-            <>
-            <div className="listContainer">
-                {/* {
-                this.props.recipes.map(recipe => {
-                return(
+    }, []);
 
-                <div className="resultContainer" key={recipe.id}>
-                <div className="resultPictureContainer">
-                <img src={recipe.image} alt="" className="resultPicture"/>
-                </div>
-                <div className="resultDescriptionContainer">
-                    <a href="" className="resultTitle"><h1>{recipe.title}</h1></a>
-                    <span>Type Of Diet</span>
-                </div>
-                </div>
-        )
-    }
-    )
-    }
-                 */}
+
+
+    return (
+        <div>
+            <div>
+                <Paginado
+                recipesPerPage={recipesPerPage}
+                allRecipes={allRecipes.length}
+                paginado={paginado}
+                previous={previous}
+                next={next}>
+                </Paginado>
+
+                {currentRecipes?.map(recipe => {
+                    return (
+                        <Resultado
+                        key={recipe.id}
+                        title={recipe.title}
+                        image={recipe.image}
+                        diets={recipe.diets}
+                        id={recipe.id}></Resultado>
+                    )
+                })
+                }
             </div>
-
-            </>
-        )
-    }
-}
-
+        </div>
+    )
+};
 
 function mapStateToProps(state) {
+    console.log('Maps state to props' , state)
     return {
-        //Asi es como queremos recibir los elementos del store
-        recipes: state.recipes
+       //Asi es como queremos recibir los elementos del store
+    recipes: state.recipes
     };
- }
- 
- function mapDispatchToProps(dispatch) {
+}
+function mapDispatchToProps(dispatch) {
     return {
-        //Las funcionalidades que este componente aplicaran al store
-        
+       //Las funcionalidades que este componente aplicaran al store
     };
- }
-
+} 
 
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
- )(List);
- 
-
-
-
-//export default ListResultComponent;
-
-
-
-
-
-
-
-
-
- {/*******************************************************************************/
-                /*Pagination
-                <div className="paginationContainer">
-                    <div className="pagination">
-                        <a href="#">&laquo;</a>
-                        <a href="#">1</a>
-                        <a href="#" class="active">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#">6</a>
-                        <a href="#">&raquo;</a>
-                    </div>
-                </div>
-                */}
-
-
-
-
-// {/* <div className 'paginationContainer'>
-//       <div className='pagination'>
-//         <a href='#' className='paginationButton'>Previous</a>
-//         <a href='#' className='paginationButton'>1</a>
-//         <a href='#' className='paginationButton'>2</a>
-//         <a href='#' className='paginationButton'>3</a>
-//         <a href='#' className='paginationButton'>Next</a>
-//       </div>
-//     </div> */}
+)(List);

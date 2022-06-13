@@ -1,4 +1,4 @@
-ul{
+/* ul{
     display: flex;
     justify-content: center;
     list-style: none;
@@ -21,4 +21,36 @@ span{
 span:hover{
     color: black;
     background-color: blanchedalmond;
+} */
+
+
+.paginationContainer{
+    padding-top: 20px;
+    padding-bottom: 300px;
+    text-align: center;
+}
+.pagination {
+    display: inline-block;
+    margin-top: 20px;
+}
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background: var(--secondary);
+    font-family: 'Ubuntu-Bold';
+}
+.pagination a:hover{
+    box-shadow: 5px 5px 4px #888888;
+}
+.pagination a.active {
+    background-color: #3a8b3d;
+    color: white;
+    border: 1px solid #3a8b3d;
 }

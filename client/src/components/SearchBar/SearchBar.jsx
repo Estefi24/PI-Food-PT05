@@ -19,10 +19,23 @@ export class SearchBar extends Component{
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.viewAllRecipes = this.viewAllRecipes.bind(this);
         // this.handleOnClick = this.handleOnClick.bind(this);
         this.listRef = React.createRef()
     
     }
+
+    viewAllRecipes() {
+        this.props.addSearch(
+            {
+            search:'',
+            typeDiet:'all' , 
+            orderByAlphabetical:'none',
+            orderByhealthScore: 'none'
+            }
+        );
+    }
+
 
     handleChange(event){
         this.setState({[event.target.name]: event.target.value});
@@ -60,7 +73,9 @@ export class SearchBar extends Component{
         // eslint-disable-next-line no-unused-vars
         // const {search} = this.state;
         return(
-            <form onSubmit={this.handleSubmit}>
+            <>
+            <button onClick={this.viewAllRecipes}> View all recipes </button>
+             <form onSubmit={this.handleSubmit}>
             <div className='searchContainer padding-top-box'>
                 <div className='searchContainerRow'>
                     <input type='text' name='search' onChange={this.handleChange} value= {this.state.search} className='searchFormInput' placeholder='Search by recipe name' />
@@ -102,6 +117,7 @@ export class SearchBar extends Component{
                 </div> */}
             </div>
             </form>
+            </>
         )
             
     }

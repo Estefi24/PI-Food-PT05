@@ -11,7 +11,12 @@
     background-size: cover;
 }
 
-.typesInput {color:black
+.checkboxContainer {
+    max-width: 200px;
+}
+.typesInput {color:black;
+    font-size: 12px;
+
 }
 
 .create button{
@@ -56,6 +61,9 @@
     /* background-image: url('https://images.unsplash.com/photo-1498522271744-cdd435c13f24?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1508&q=80'); */
     color: white;
     background-position: center center;
+}
+.inputImageBox {
+    color: black
 }
 
 .formulario div{
@@ -103,6 +111,18 @@
     margin-block-start: 30px;
 }
 
+.addRecipeFormValidationErrorInput{
+    background: red;
+    opacity: 65%;
+    color: white;
+    animation-name: addRecipeFormValidationErrorInputAnimation;
+    animation-duration: 0.5s;
+}
+@keyframes addRecipeFormValidationErrorInputAnimation{
+    0% {margin-left: calc(-100px);}
+    50% {margin-left: calc(0px);}
+    100% {margin-left: calc(100px);}
+}
 /* .buttonSave{
     margin-block-start: 20px;
 } */

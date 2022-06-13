@@ -42,7 +42,7 @@ class RecipeCreate extends React.Component {
         }
         else{
 
-            var regEx = /^[a-zA-Z0-9]*$/;
+            var regEx = /^[\t\n\v\f\r \u00a0\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u200b\u2028\u2029\u3000]*$/;
 
             if (e.target.value.length < 256 && regEx.test(e.target.value) === true) {
                 this.setState({validation: true})
@@ -71,28 +71,28 @@ if(this.state.recipe.ketogenic){ this.setState= {...this.state.recipe, recipe:{ 
 if(this.state.recipe.fodmapFriendly){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('fodmap friendly') } }; }
 console.log(this.state.diets);
 
-if (this.state.validation){}
-        axios.post('/food/recipe', {
-            recipe: {
-            title: this.state.recipe.title,
-            summary: this.state.recipe.summary,
-            image: this.state.recipe.image,
-            aggregateLikes: this.state.recipe.aggregateLikes,
-            healthScore: this.state.recipe.healthScore,
-            analizedInstructions: this.state.recipe.analizedInstructions,
-            diets: this.state.recipe.diets
-            }
-        })
-        .then( res => {
-            console.log(res);
-
-        if(res.status === 200){
-            alert('The recipe has been uploaded succesly');
+if (this.state.validation){
+    axios.post('/food/recipe', {
+        recipe: {
+        title: this.state.recipe.title,
+        summary: this.state.recipe.summary,
+        image: this.state.recipe.image,
+        aggregateLikes: this.state.recipe.aggregateLikes,
+        healthScore: this.state.recipe.healthScore,
+        analizedInstructions: this.state.recipe.analizedInstructions,
+        diets: this.state.recipe.diets
         }
-
     })
-    console.log(this.state);
+    .then( res => {
+        console.log(res);
+
+    if(res.status === 200){
+        alert('The recipe has been uploaded succesly');
     }
+    })
+        console.log(this.state);
+}
+}  
 
     componentDidMount() {
         axios.get('/food/types').then (res => {
@@ -121,8 +121,8 @@ if (this.state.validation){}
                     <div className='form'>
                     <input type="text" name="summary" placeholder="Summary" onChange={this.handleChange} value={this.state.recipe.summary}/>
                     </div>
-                    <div className='form'>
-                    <input type="text" name="image" placeholder="Image" onChange={this.handleChange} value={this.state.recipe.image}/>
+                    <div className='form inputImageBox'>
+                    <input type="file" name="image" placeholder="Image" onChange={this.handleChange} value={this.state.recipe.image}/>
                     </div>
                     <div className='form'>
                     <input type="number" name="aggregateLikes" placeholder="AggregateLikes" onChange={this.handleChange} value={this.state.recipe.aggregateLikes} />
@@ -133,6 +133,7 @@ if (this.state.validation){}
                     <div className='form'>
                     <input type="text" name="analizedInstructions" placeholder="analizedInstructions" onChange={this.handleChange} value={this.state.recipe.analizedInstructions}/>
                     </div> 
+                    <div className='checkboxContainer'>
                     <label className='typesInput'>Gluten Free</label>
                     <input type="checkbox" name='glutenFree' value={this.state.glutenFree} onChange={this.handleChange}/> 
                     <label className='typesInput' >Dairy Free</label>
@@ -152,7 +153,8 @@ if (this.state.validation){}
                     <label className='typesInput'>Ketogenic</label>
                     <input type="checkbox" name='ketogenic' value={this.state.ketogenic} onChange={this.handleChange}/> 
                     <label className='typesInput'>Fodmap Friendly</label>
-                    <input type="checkbox" name='fodmapFriendly' value={this.state.fodmapFriendly} onChange={this.handleChange}/>                     
+                    <input type="checkbox" name='fodmapFriendly' value={this.state.fodmapFriendly} onChange={this.handleChange}/> 
+                    </div>                                        
                     <div className='buttonCreate'>
                     <button type='submit' >Create</button>
                     </div>

@@ -16,16 +16,17 @@ class RecipeCreate extends React.Component {
             healthScore: 0,
             analizedInstructions: '',
             diets: [],
-            glutenFree: false,
-            dairyFree:  false,
-            lactoOvoVegetarian: false,
-            vegan:  false,
-            paleolithic: false,
-            primal: false,
-            whole30:  false,
-            pescatarian:  false,
-            ketogenic:  false,
-            fodmapFriendly:  false
+//.......................................................................
+            // glutenFree: false,
+            // dairyFree:  false,
+            // lactoOvoVegetarian: false,
+            // vegan:  false,
+            // paleolithic: false,
+            // primal: false,
+            // whole30:  false,
+            // pescatarian:  false,
+            // ketogenic:  false,
+            // fodmapFriendly:  false
         },
         
         validation: true       
@@ -37,12 +38,15 @@ class RecipeCreate extends React.Component {
     }
 
     handleChange(e) {
+        
         if(e.target.type === 'checkbox'){
             this.setState({recipe: {...this.state.recipe , [e.target.name]: e.target.checked}});
         }
         else{
 
-            var regEx = /^[\t\n\v\f\r \u00a0\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u200b\u2028\u2029\u3000]*$/;
+            var regEx = /^[A-Za-z0-9\s]+$/g
+
+            // var regEx = /^[\t\n\v\f\r \u00a0\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u200b\u2028\u2029\u3000]*$/;
 
             if (e.target.value.length < 256 && regEx.test(e.target.value) === true) {
                 this.setState({validation: true})
@@ -55,8 +59,11 @@ class RecipeCreate extends React.Component {
         }
     }
 
-    handleSubmit(e) {
+    async handleSubmit(e) {
+        console.log(this.state)
         e.preventDefault();
+        alert('Congratulations you created a new recipe!');
+
 //---------------------------------------------------
 //Añadir al array de dietas
 if(this.state.recipe.glutenFree){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('gluten free') } }; }
@@ -72,7 +79,7 @@ if(this.state.recipe.fodmapFriendly){ this.setState= {...this.state.recipe, reci
 console.log(this.state.diets);
 
 if (this.state.validation){
-    axios.post('/food/recipe', {
+    const response= await axios.post('/food/recipe', {
         recipe: {
         title: this.state.recipe.title,
         summary: this.state.recipe.summary,
@@ -83,23 +90,24 @@ if (this.state.validation){
         diets: this.state.recipe.diets
         }
     })
-    .then( res => {
-        console.log(res);
+    console.log(response.data)
+    // .then( res => {
+    //     console.log(res);
 
-    if(res.status === 200){
-        alert('The recipe has been uploaded succesly');
-    }
-    })
-        console.log(this.state);
+    // if(res.status === 200){
+    //     alert('Congratulations you created a new recipe!');
+    // }
+    // })x
+    //     console.log(this.state);
 }
 }  
 
-    componentDidMount() {
-        axios.get('/food/types').then (res => {
-            this.setState({types: res.data})
+    // componentDidMount() {
+    //     axios.get('/food/types').then (res => {
+    //         this.setState({diets: res.data.value})
 
-        })
-    }
+    //     })
+    // }
 
     render() {
         return (

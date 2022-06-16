@@ -43,7 +43,7 @@ export class SearchBar extends Component{
 
     handleSubmit(event){
         event.preventDefault(); 
-        this.props.addSearch(
+      this.props.addSearch(
             {
             search:this.state.search ,
             typeDiet:this.state.typeDiet , 
@@ -51,6 +51,11 @@ export class SearchBar extends Component{
             orderByhealthScore: this.state.orderByhealthScore
             }
         );
+    // if (this.search.search !== this.target.value) {
+    //     event.preventDefault();
+    //     alert('No Found')
+    // }
+
     }
 
     // componentDidMount(){

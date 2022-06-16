@@ -52,7 +52,7 @@ export function List(props) {
                 next={next}>
                 </Paginado>
 
-                {currentRecipes?.map(recipe => {
+                {currentRecipes.length ? currentRecipes?.map(recipe => {
                     return (
                         <Resultado
                         key={recipe.id}
@@ -61,8 +61,10 @@ export function List(props) {
                         diets={recipe.diets}
                         id={recipe.id}></Resultado>
                     )
-                })
+                }) :
+                <span>Recipe No Found</span>
                 }
+               
             </div>
         </div>
     )

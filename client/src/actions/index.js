@@ -1,6 +1,7 @@
+/* eslint-disable no-self-assign */
 import axios from  'axios';
 
-export function addSearch( search){
+export function addSearch(search){
 
   
 
@@ -10,14 +11,17 @@ export function addSearch( search){
 
       let recipesReturn = [];
 
+
    //Filtros
     if(search){
 
     console.log('Deberia estar el searchHealthScore' , search.orderByhealthScore);
 
     if(search.search.lenght !== 0){
-      recipesReturn = res.data.filter(result =>  result.title.includes(search.search));
-    }else{
+      recipesReturn = res.data.filter(result =>  result.title.toLowerCase().includes(search.search.toLowerCase()));
+    // } if (search.search === undefined){
+    //   alert ('NO Found')
+    } else{
       recipesReturn = res.data;
     }
 
@@ -27,7 +31,7 @@ export function addSearch( search){
     }else{
       recipesReturn = recipesReturn;
     }
-
+    
     //------------------------------------------------------------------
     if(search.orderByAlphabetical !== 'none'){
       if(search.orderByAlphabetical === 'ascend'){

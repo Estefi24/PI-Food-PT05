@@ -97,6 +97,21 @@ router.get('/recipes/:id', async (req, res, next) => {
 }
 });
 
+// router.get('/types', async (req, res)=> {
+//     let allRecipes= await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&addRecipeInformation=true&number=50`)
+//     const types= await allRecipes.data.results.map(r=> r.diets)
+//     let diets= types.flat()
+//     let typeDiets= [...new Set(diets),'vegetarian']
+//     typeDiets.forEach(r => {
+//         Diet.findOrCreate({
+//             where: { name: r }
+//         })
+//     });
+//     const allDiets = await Diet.findAll()
+//     res.json(allDiets)
+
+// })
+
 router.get('/types', async (req, res, next) => {
     try{
         const dietType = await Diet.findAll();
@@ -107,28 +122,31 @@ router.get('/types', async (req, res, next) => {
 });
 
 router.post('/recipe', async (req, res) => {
-    console.log('holaaaa')
+    // console.log('holaaaa')
     console.log(req.body);
-    const { title, summary, aggregateLikes, healthScore, analizedInstructions, diets } = req.body;
+    const { title, summary, image, aggregateLikes, healthScore, analizedInstructions, diets } = req.body.recipe;
     // if (req.body.diets) {
     //     const diets = req.body.diets
 
     // } else {
     //     const diets = []
     // }
-
+  
     const recipeCreated = await Recipe.create({
         title,
-        summary,    
+        summary,
+        image,    
         aggregateLikes,
         healthScore,
         analizedInstructions
 
     });
 
-    let dietDb = await Diet.findAll({ where: {name: diets} })
-
+diets.forEach(async element => {
+    let dietDb = await Diet?.findAll({ where: {name: element} })
     recipeCreated.addDiet(dietDb)
+});
+    
     res.status(200).send('Receta creada exitosamente')
 
     // res.status(202).send('mensaje de prueba')

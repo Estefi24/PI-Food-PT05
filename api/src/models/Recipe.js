@@ -6,7 +6,6 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      // allowNull: false,
       primaryKey: true    
     },
     title: {
@@ -19,6 +18,7 @@ module.exports = (sequelize) => {
     },
     aggregateLikes: {
       type: DataTypes.INTEGER,
+      allowNull: true,
     },
     healthScore: {
       type: DataTypes.INTEGER,

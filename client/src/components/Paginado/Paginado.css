@@ -48,9 +48,11 @@ span:hover{
 }
 .pagination a:hover{
     box-shadow: 5px 5px 4px #888888;
+    background-color: blueviolet;
 }
 .pagination a.active {
     background-color: #3a8b3d;
     color: white;
     border: 1px solid #3a8b3d;
+    font-weight:bold;
 }

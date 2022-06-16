@@ -20,8 +20,7 @@ export default function Paginado ({recipesPerPage, allRecipes, paginado, previou
             {pageNumbers && pageNumbers.map((number) => (
               <a onClick={() => paginado(number)} key={number} >{number}</a>
             ))}
-        <a className='btn-page' onClick={() => next()}>Next</a>
-            
+        <a className='btn-page' onClick={() => next()}>Next</a>    
             
             {/* <button id="btnNext">Next.</button> */}
         </div>

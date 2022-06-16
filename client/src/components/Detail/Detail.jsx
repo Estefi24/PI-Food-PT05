@@ -74,6 +74,7 @@ export default function Detail(props) {
             }</p> */}
 
         </div>
+        {/* <div> <h2> loading... </h2> </div> */}
     </div>
 )
 }

@@ -21,9 +21,9 @@
 
 .create button{
     background-color:  rgba(240, 228, 236, 0.712);
-    border-bottom-left-radius: 5px;
-    border-top-right-radius: 5px;
-    padding: 5px;
+    border-bottom-left-radius: 3px;
+    border-top-right-radius: 3px;
+    padding: 10px;
     background-color: rgb(73, 77, 50); 
     color:white;
 }

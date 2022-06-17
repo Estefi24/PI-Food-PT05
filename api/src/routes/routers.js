@@ -1,7 +1,7 @@
 const { Router } = require('express');
 require('dotenv').config();
 const axios = require('axios');
-const { Recipe, Diet, DishTypes } = require('../db');
+const { Recipe, Diet} = require('../db');
 
 const router = Router();
 
@@ -39,20 +39,22 @@ const dbInfo= await db?.map(d => {
         image: d.image,
         title: d.title,
         dishTypes: d.dishTypes,
-        diets: d.diets,
+        diets: d.diets.map(element => element.name),
         summary: d.summary,
         aggregateLikes: d.aggregateLikes,
         healthScore: d.healthScore,
         analizedInstructions: d.analizedInstructions
     };
 });
+// console.log(dbInfo.diets.join( ' ,'))
+// console.log('viene del back')
         return dbInfo;
 };
 
 const getAllRecipes = async () => {
     const dbInfo = await getDbInfo();
     const apiInfo = await getApiInfo();
-    const infoTotal = apiInfo.concat(dbInfo);
+    const infoTotal = dbInfo.concat(apiInfo);
     return infoTotal;
 };
 
@@ -108,9 +110,9 @@ router.get('/types', async (req, res, next) => {
 });
 
 router.post('/recipe', async (req, res) => {
-    const { title, summary, image, dishTypes, aggregateLikes, healthScore, analizedInstructions, diets } = req.body.recipe;
+    
+    const { title, summary, image, dishTypes, aggregateLikes, healthScore, analizedInstructions, diets } = req.body;
 
-  
     const recipeCreated = await Recipe.create({
         title,
         summary,
@@ -122,13 +124,15 @@ router.post('/recipe', async (req, res) => {
 
     });
 
-
+    console.log(diets)
 diets.forEach(async element => {
-    let dietDb = await Diet?.findAll({ where: {name: element} })
+    let dietDb = await Diet?.findOne({ where: {name: element} })
     recipeCreated.addDiet(dietDb)
-});
     
-    res.status(200).send('Receta creada exitosamente')
+});
+    console.log(recipeCreated.dataValues)
+    // res.status(200).send('Receta creada exitosamente')
+    res.json(recipeCreated)
 });
 
 

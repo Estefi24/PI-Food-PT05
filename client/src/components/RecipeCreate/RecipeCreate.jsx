@@ -32,20 +32,27 @@ class RecipeCreate extends React.Component {
     handleChange(e) {
         
         if(e.target.type === 'checkbox'){
-            this.setState({recipe: {...this.state.recipe , [e.target.name]: [...this.state.recipe[e.target.name], e.target.value]}});
+            if (e.target.checked) {
+                this.setState({recipe: {...this.state.recipe , [e.target.name]: [...this.state.recipe[e.target.name], e.target.value]}});
+            } else {
+                this.setState({recipe: {...this.state.recipe, [e.target.name]: this.state.recipe[e.target.name].filter(element => e.target.value !== element)}})
+            }
+console.log(this.state.recipe.diets)
+        console.log('estoy acaaa')
+        
         }
         else{
              // var regEx = /^[\t\n\v\f\r \u00a0\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u200b\u2028\u2029\u3000]*$/;
 
-            // var regEx = /^[A-Za-z0-9\s]+$/g
+            var regEx = /^[A-Za-z0-9\s]+$/g
 
-            // if (e.target.value.length < 256 && regEx.test(e.target.value) === true) {
-            //     this.setState({validation: true})
-            //     e.target.className = '';
-            // } else {
-            //     this.setState({validation: false})
-            //     e.target.className = 'addRecipeFormValidationErrorInput';
-            // }
+            if (e.target.value.length < 256 && regEx.test(e.target.value) === true) {
+                this.setState({validation: true})
+                e.target.className = '';
+            } else {
+                this.setState({validation: false})
+                e.target.className = 'addRecipeFormValidationErrorInput';
+            }
             this.setState({recipe: {...this.state.recipe , [e.target.name]: e.target.value}});
         }
     }
@@ -69,21 +76,25 @@ componentDidMount = async () =>{
 
 //---------------------------------------------------
 //Añadir al array de dietas
-if(this.state.recipe.glutenFree){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('gluten free') } }; }
-if(this.state.recipe.dairyFree){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('dairy free') } }; }
-if(this.state.recipe.lactoOvoVegetarian){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('lacto ovo vegetarian') } }; }
-if(this.state.recipe.vegan){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('vegan') } }; }
-if(this.state.recipe.paleolithic){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('paleolithic') } }; }
-if(this.state.recipe.primal){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('primal') } }; }
-if(this.state.recipe.whole30){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('whole 30') } }; }
-if(this.state.recipe.pescatarian){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('pescatarian') } }; }
-if(this.state.recipe.ketogenic){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('ketogenic') } }; }
-if(this.state.recipe.fodmapFriendly){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('fodmap friendly') } }; }
+// if(this.state.recipe.glutenFree){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('gluten free') } }; }
+// if(this.state.recipe.dairyFree){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('dairy free') } }; }
+// if(this.state.recipe.lactoOvoVegetarian){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('lacto ovo vegetarian') } }; }
+// if(this.state.recipe.vegan){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('vegan') } }; }
+// if(this.state.recipe.paleolithic){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('paleolithic') } }; }
+// if(this.state.recipe.primal){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('primal') } }; }
+// if(this.state.recipe.whole30){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('whole 30') } }; }
+// if(this.state.recipe.pescatarian){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('pescatarian') } }; }
+// if(this.state.recipe.ketogenic){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('ketogenic') } }; }
+// if(this.state.recipe.fodmapFriendly){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('fodmap friendly') } }; }
 
 
-if (this.state.validation){
+// if (this.state.validation){
+    if (true){
+        let dietas = this.state.recipe.diets
+        console.log(this.state.recipe)
+        console.log('dietas')
+    
     const response= await axios.post('/food/recipe', {
-        recipe: {
         title: this.state.recipe.title,
         summary: this.state.recipe.summary,
         image: this.state.recipe.image,
@@ -91,11 +102,12 @@ if (this.state.validation){
         aggregateLikes: this.state.recipe.aggregateLikes,
         healthScore: this.state.recipe.healthScore,
         analizedInstructions: this.state.recipe.analizedInstructions,
-        diets: this.state.recipe.diets
+        diets:dietas
         }
-    })
+    )
 }
 }  
+
 
     // componentDidMount() {
     //     axios.get('/food/types').then (res => {
@@ -103,8 +115,10 @@ if (this.state.validation){
 
     //     })
     // }
-    
     render() {
+    // console.log(this.state.recipe.diets)
+    console.log(this.state.recipe.diets)
+    console.log('estoy mandando objeto')
         return (
             <div className='create'>
                 <h1>Upload your own recipe!!</h1>
@@ -126,8 +140,8 @@ if (this.state.validation){
                         <input type="url" name="image" placeholder= "URL de imagen" value={this.state.recipe.image} onChange={this.handleChange} required/>
                     </div>
                     <div className='formDish'>
-                        {this.state.allDishTypes.map((t) => {
-                        return <label>
+                        {this.state.allDishTypes.map((t, i) => {
+                        return <label key={i}> 
                             <input type="checkbox" name="dishTypes" onChange={this.handleChange} value={t}/>
                             {t}
                         </label>
@@ -144,11 +158,11 @@ if (this.state.validation){
                     </div> 
                     <div className='checkboxContainer'>
                     <label className='typesInput'>Gluten Free</label>
-                    <input type="checkbox" name= 'diets' value= 'glutenFree' onChange={this.handleChange}/> 
-                    <label className='typesInput' >Dairy Free</label>
-                    <input type="checkbox" name='diets' value= 'dairyFree' onChange={this.handleChange}/> 
+                    <input type="checkbox" name= 'diets' value= 'gluten free' onChange={this.handleChange}/> 
+                    <label className='typesInput' >Dairy Free</label>   
+                    <input type="checkbox" name='diets' value= 'dairy free' onChange={this.handleChange}/> 
                     <label className='typesInput'>Lacto Ovo Vegetarian</label>
-                    <input type="checkbox" name='diets' value='lactoOvoVegetarian' onChange={this.handleChange}/> 
+                    <input type="checkbox" name='diets' value='lacto ovo vegetarian' onChange={this.handleChange}/> 
                     <label className='typesInput'>Vegan</label>
                     <input type="checkbox" name='diets' value='vegan' onChange={this.handleChange}/> 
                     <label className='typesInput'>Paleolithic</label>
@@ -156,13 +170,13 @@ if (this.state.validation){
                     <label className='typesInput'>Primal</label>
                     <input type="checkbox" name='diets' value='primal' onChange={this.handleChange}/> 
                     <label className='typesInput'>Whole 30</label>
-                    <input type="checkbox" name='diets' value= 'whole30' onChange={this.handleChange}/> 
+                    <input type="checkbox" name='diets' value= 'whole 30' onChange={this.handleChange}/> 
                     <label className='typesInput'>Pescatarian</label>
                     <input type="checkbox" name='diets' value='pescatarian' onChange={this.handleChange}/> 
                     <label className='typesInput'>Ketogenic</label>
                     <input type="checkbox" name='diets' value='ketogenic' onChange={this.handleChange}/> 
                     <label className='typesInput'>Fodmap Friendly</label>
-                    <input type="checkbox" name='diets' value='fodmapFriendly' onChange={this.handleChange}/> 
+                    <input type="checkbox" name='diets' value='fodmap friendly' onChange={this.handleChange}/> 
                     </div>                                        
                     <div className='buttonCreate'>
                     <button type='submit' >Create</button>

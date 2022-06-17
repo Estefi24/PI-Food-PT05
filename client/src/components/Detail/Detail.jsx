@@ -14,10 +14,7 @@ export default function Detail(props) {
     const [recipe , setRecipe] = useState({id: id , title: '' , diets: [] , image: '' , dishTypes: [] , summary: '', healtScore: '' , steps: '', analizedInstructions: ''});
 
     useEffect(() => {
-        axios.get(`/food/recipes/${id}`).then(res => {
-    console.log('estoy en detail')
-            console.log(res.data)
-    
+        axios.get(`/food/recipes/${id}`).then(res => {    
             setRecipe(
                 {
                     id: id,
@@ -48,9 +45,10 @@ export default function Detail(props) {
             <h2>{recipe.title}</h2>
             <img src={recipe.image} alt="" className="detailPicture"/>
             <h3>TypeDiets:</h3>
-            <p>{recipe.diets.map( (type , index=0) => {
+            <p>{recipe.diets.join(' ,')}</p>
+            {/* <p>{recipe.diets.map( (type , index=0) => {
                 return <span key={index}> | {type.name}</span>
-                })}</p>
+                })}</p> */}
             <h3>DishTypes:</h3>
             {recipe.dishTypes.map( (type , index=0) => {
                 return <span key={index}> | {type}</span>

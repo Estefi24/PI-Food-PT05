@@ -36,8 +36,7 @@ const { Recipe, Diet } = sequelize.models;
 // Product.hasMany(Reviews);
 Recipe.belongsToMany(Diet, { through: 'recipe_diet' });
 Diet.belongsToMany(Recipe, { through: 'recipe_diet' });
-// Recipe.belongsToMany(DishTypes, {through: 'recipe_dishTypes'})
-// DishTypes.belongsToMany(Recipe, {through: 'recipe_dishTypes'})
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

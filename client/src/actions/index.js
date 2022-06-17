@@ -19,8 +19,6 @@ export function addSearch(search){
 
     if(search.search.lenght !== 0){
       recipesReturn = res.data.filter(result =>  result.title.toLowerCase().includes(search.search.toLowerCase()));
-    // } if (search.search === undefined){
-    //   alert ('NO Found')
     } else{
       recipesReturn = res.data;
     }

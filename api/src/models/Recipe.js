@@ -17,19 +17,16 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     aggregateLikes: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
+      type: DataTypes.INTEGER
     },
     dishTypes:{
       type: DataTypes.ARRAY(DataTypes.STRING)
     },
     healthScore: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
+      type: DataTypes.INTEGER
     },
     analizedInstructions:{
-      type: DataTypes.TEXT,
-      allowNull: true,
+      type: DataTypes.TEXT
     },
     image:{
       type:DataTypes.TEXT

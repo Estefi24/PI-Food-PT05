@@ -1,8 +1,6 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-unreachable */
 /* eslint-disable no-lone-blocks */
-//Importar las actions
-import { addSearch } from "../actions/index";
+
 
 //InitialState contiene las mismas propiedades que el store
 const initialState = {

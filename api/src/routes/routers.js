@@ -30,11 +30,7 @@ const getDbInfo = async () => {
         include:[{
             model: Diet,
             attributes: ['name']
-        },
-        // {
-        //     model: DishTypes,
-        //     attributes: ['name']
-        ]
+        }]
     });
 
 const dbInfo= await db?.map(d => {
@@ -101,20 +97,6 @@ router.get('/recipes/:id', async (req, res, next) => {
 }
 });
 
-// router.get('/types', async (req, res)=> {
-//     let allRecipes= await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&addRecipeInformation=true&number=50`)
-//     const types= await allRecipes.data.results.map(r=> r.diets)
-//     let diets= types.flat()
-//     let typeDiets= [...new Set(diets),'vegetarian']
-//     typeDiets.forEach(r => {
-//         Diet.findOrCreate({
-//             where: { name: r }
-//         })
-//     });
-//     const allDiets = await Diet.findAll()
-//     res.json(allDiets)
-
-// })
 
 router.get('/types', async (req, res, next) => {
     try{
@@ -126,15 +108,8 @@ router.get('/types', async (req, res, next) => {
 });
 
 router.post('/recipe', async (req, res) => {
-    // console.log('holaaaa')
-    console.log(req.body);
     const { title, summary, image, dishTypes, aggregateLikes, healthScore, analizedInstructions, diets } = req.body.recipe;
-    // if (req.body.diets) {
-    //     const diets = req.body.diets
 
-    // } else {
-    //     const diets = []
-    // }
   
     const recipeCreated = await Recipe.create({
         title,
@@ -147,12 +122,6 @@ router.post('/recipe', async (req, res) => {
 
     });
 
-    console.log(dishTypes)
-
-// dishTypes.forEach(async element => {
-//     let dishDb = await DishTypes?.findAll({where: {name: element}})
-//     recipeCreated.addDishTypes(dishDb)
-// });
 
 diets.forEach(async element => {
     let dietDb = await Diet?.findAll({ where: {name: element} })
@@ -160,9 +129,6 @@ diets.forEach(async element => {
 });
     
     res.status(200).send('Receta creada exitosamente')
-
-    // res.status(202).send('mensaje de prueba')
-
 });
 
 

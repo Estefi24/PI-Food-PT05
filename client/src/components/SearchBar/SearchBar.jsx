@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import './SearchBar.css';
-// eslint-disable-next-line no-unused-vars
-import store from '../../store/index';
 import {connect} from 'react-redux';
 import{ addSearch } from '../../actions/index';
 
@@ -20,7 +18,6 @@ export class SearchBar extends Component{
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.viewAllRecipes = this.viewAllRecipes.bind(this);
-        // this.handleOnClick = this.handleOnClick.bind(this);
         this.listRef = React.createRef()
     
     }
@@ -51,10 +48,6 @@ export class SearchBar extends Component{
             orderByhealthScore: this.state.orderByhealthScore
             }
         );
-    // if (this.search.search !== this.target.value) {
-    //     event.preventDefault();
-    //     alert('No Found')
-    // }
 
     }
 
@@ -69,14 +62,8 @@ export class SearchBar extends Component{
     //     );
     // }
 
-    // handleOnClick (e){
-    //     e.preventDefault();
-    // }
-
 
     render(){
-        // eslint-disable-next-line no-unused-vars
-        // const {search} = this.state;
         return(
             <>
             <button onClick={this.viewAllRecipes}> View all recipes </button>
@@ -87,11 +74,6 @@ export class SearchBar extends Component{
                     <input type='submit' value='Search' className='searchFormSubmit' />
                 </div>
                 <div className='searchContainerRow'>
-                    {/* <select name='orderRecipe' id='orderRecipe' onChange={this.handleChange} value= {this.state.orderRecipe} className='searchFormSelect' defaultValue={'None'}>
-                        <option value={'total'}>Total Recipes</option>
-                        <option value={'rice'}>Recipes Created</option>
-                        <option value={'rice'}>Recipes Api</option>
-                    </select> */}
                     <select name='typeDiet' id='typeDiet' onChange={this.handleChange} value= {this.state.typeDiet} className='searchFormSelect' >
                         <option value={'all'}>All Recipes</option>
                         <option value={'gluten free'}>gluten free</option>
@@ -116,10 +98,6 @@ export class SearchBar extends Component{
                         <option value={'min'}>Min Score</option>
                     </select>
                 </div>
-                
-                {/* <div className='todos'>
-                <button onClick={this.handleOnClick}>Show all recipes</button>
-                </div> */}
             </div>
             </form>
             </>
@@ -147,8 +125,3 @@ export default connect(
     mapStateToProps,
      mapDispatchToProps
 )(SearchBar);
-
-
-
-
-// export default SearchBar;

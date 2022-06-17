@@ -3,10 +3,8 @@
 import React, { useState , useEffect } from 'react';
 //Importar el connect
 import {connect , useDispatch, useSelector} from 'react-redux';
-//Importar link
-import { Link } from "react-router-dom";
-import { addSearch } from '../../actions';
 
+import { addSearch } from '../../actions';
 import Resultado from '../Resultado/Resultado';
 import Paginado from '../Paginado/Paginado';
 

@@ -10,9 +10,16 @@
     background-attachment: fixed;
     background-size: cover;
 }
+.formDish {
+    background-color: gainsboro;
+    font-size: 12px;
+    color: black;
+    max-lines: 10px;
+}
 
 .checkboxContainer {
     max-width: 200px;
+    background-color: gainsboro;
 }
 .typesInput {color:black;
     font-size: 12px;

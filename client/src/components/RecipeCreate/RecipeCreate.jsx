@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
@@ -17,19 +18,8 @@ class RecipeCreate extends React.Component {
             healthScore: 0,
             analizedInstructions: '',
             diets: []
-//.......................................................................
-            // glutenFree: false,
-            // dairyFree:  false,
-            // lactoOvoVegetarian: false,
-            // vegan:  false,
-            // paleolithic: false,
-            // primal: false,
-            // whole30:  false,
-            // pescatarian:  false,
-            // ketogenic:  false,
-            // fodmapFriendly:  false
         },
-        allRecipes: [],
+        allDishTypes: [],
         
         validation: true       
     };
@@ -68,13 +58,12 @@ componentDidMount = async () =>{
             if (! typesDish.includes(t))typesDish.push(t)
         })
     })
-    this.setState ({allRecipes: typesDish})
+    this.setState ({allDishTypes: typesDish})
 
 }
 
 
     async handleSubmit(e) {
-        // console.log(this.state)
         e.preventDefault();
         alert('Congratulations you created a new recipe!');
 
@@ -90,10 +79,9 @@ if(this.state.recipe.whole30){ this.setState= {...this.state.recipe, recipe:{ di
 if(this.state.recipe.pescatarian){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('pescatarian') } }; }
 if(this.state.recipe.ketogenic){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('ketogenic') } }; }
 if(this.state.recipe.fodmapFriendly){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('fodmap friendly') } }; }
-// console.log(this.state.diets);
+
 
 if (this.state.validation){
-    console.log(this.state.recipe.image);
     const response= await axios.post('/food/recipe', {
         recipe: {
         title: this.state.recipe.title,
@@ -106,15 +94,6 @@ if (this.state.validation){
         diets: this.state.recipe.diets
         }
     })
-    console.log(response.data)
-    // .then( res => {
-    //     console.log(res);
-
-    // if(res.status === 200){
-    //     alert('Congratulations you created a new recipe!');
-    // }
-    // })x
-    //     console.log(this.state);
 }
 }  
 
@@ -126,22 +105,16 @@ if (this.state.validation){
     // }
     
     render() {
-        console.log(this.state.recipe.diets);
         return (
             <div className='create'>
-            {/* <div className='buttonHome'> */}
-                {/* <Link to='/home'><button>Create Recipe</button></Link> */}
-            {/* </div> */}
                 <h1>Upload your own recipe!!</h1>
                 <div className='buttonHome' >
                 <Link to='/Home' className='go back to home'><button>Go back to Home</button></Link>
-                    {/* <button type='submit' onClick={this.handleSubmit}>Go back to Home</button> */}
                 </div>
             <div className='form'>
                 <form action="" className ='recipeCreateForm' onSubmit={this.handleSubmit}>
                     <div className='form'>
                     <input type="text" name="title" placeholder="Name" onChange={this.handleChange} value={this.state.recipe.title}/>
-                    {/* {error.title && <p>{error.title}</p>} */}
                     </div>
                     <div className='form'>
                     <input type="text" name="summary" placeholder="Summary" onChange={this.handleChange} value={this.state.recipe.summary}/>
@@ -152,9 +125,9 @@ if (this.state.validation){
                     <div className='form inputImageBox'>
                         <input type="url" name="image" placeholder= "URL de imagen" value={this.state.recipe.image} onChange={this.handleChange} required/>
                     </div>
-                    <div className='form'>
-                        {this.state.allRecipes.map((t) => {
-                       return <label>
+                    <div className='formDish'>
+                        {this.state.allDishTypes.map((t) => {
+                        return <label>
                             <input type="checkbox" name="dishTypes" onChange={this.handleChange} value={t}/>
                             {t}
                         </label>
@@ -194,9 +167,6 @@ if (this.state.validation){
                     <div className='buttonCreate'>
                     <button type='submit' >Create</button>
                     </div>
-                    {/* <div className='buttonSave'>
-                    <button type='submit' >Save recipe</button>
-                    </div> */}
                 </form>
                 </div>
             </div>

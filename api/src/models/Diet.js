@@ -4,7 +4,6 @@ module.exports = (sequelize) => {
     sequelize.define ('diet', {
         name: {
             type: DataTypes.TEXT,
-            // allowNull: false,
         },
         
     })

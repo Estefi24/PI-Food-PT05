@@ -40,7 +40,7 @@ export function List(props) {
     }, []);
 
 
-
+console.log(currentRecipes)
     return (
         <div>
             <div>

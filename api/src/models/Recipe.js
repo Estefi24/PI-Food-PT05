@@ -20,6 +20,9 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
+    dishTypes:{
+      type: DataTypes.ARRAY(DataTypes.STRING)
+    },
     healthScore: {
       type: DataTypes.INTEGER,
       allowNull: true,
@@ -27,6 +30,9 @@ module.exports = (sequelize) => {
     analizedInstructions:{
       type: DataTypes.TEXT,
       allowNull: true,
+    },
+    image:{
+      type:DataTypes.TEXT
     },
     createdDb:{
       type: DataTypes.BOOLEAN,

@@ -16,7 +16,7 @@ export default function Detail(props) {
     useEffect(() => {
         axios.get(`/food/recipes/${id}`).then(res => {
     console.log('estoy en detail')
-            console.log(res.data[0])
+            console.log(res.data)
     
             setRecipe(
                 {
@@ -36,6 +36,37 @@ export default function Detail(props) {
         )
         console.log(recipe);
     }, []);
+
+    if (id.length === 36) {
+        return (
+            <div className='detail'>
+            <div className='buttonHome' >
+            <Link to='/Home' className='go back to home'><button>Go back to Home</button></Link>
+            </div>
+        <div className='detailContainer'>
+            <h1>Tittle:</h1>
+            <h2>{recipe.title}</h2>
+            <img src={recipe.image} alt="" className="detailPicture"/>
+            <h3>TypeDiets:</h3>
+            <p>{recipe.diets.map( (type , index=0) => {
+                return <span key={index}> | {type.name}</span>
+                })}</p>
+            <h3>DishTypes:</h3>
+            {recipe.dishTypes.map( (type , index=0) => {
+                return <span key={index}> | {type}</span>
+                })}
+            <h3>HealthScore:</h3>
+            <p>{recipe.healthScore}</p>
+            <h3>AggregateLikes:</h3>
+            <p>{recipe.aggregateLikes}</p>
+            <h3>Summary:</h3>
+            <p>{recipe.summary}</p>
+            <h3>Instructions:</h3>
+            <p>{recipe.steps}</p>
+        </div>
+        </div>
+        )
+    }
 
     return (
     <div className='detail'>

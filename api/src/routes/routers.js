@@ -1,7 +1,7 @@
 const { Router } = require('express');
 require('dotenv').config();
 const axios = require('axios');
-const { Recipe, Diet } = require('../db');
+const { Recipe, Diet, DishTypes } = require('../db');
 
 const router = Router();
 
@@ -27,10 +27,14 @@ const apiInfo = await apiUrl.data.results.map(d => {
 
 const getDbInfo = async () => {
     const db = await Recipe.findAll({
-        include:{
+        include:[{
             model: Diet,
             attributes: ['name']
-        }
+        },
+        // {
+        //     model: DishTypes,
+        //     attributes: ['name']
+        ]
     });
 
 const dbInfo= await db?.map(d => {
@@ -39,7 +43,7 @@ const dbInfo= await db?.map(d => {
         image: d.image,
         title: d.title,
         dishTypes: d.dishTypes,
-        diets: d.diets?.map(diet => diet.name),
+        diets: d.diets,
         summary: d.summary,
         aggregateLikes: d.aggregateLikes,
         healthScore: d.healthScore,
@@ -87,7 +91,7 @@ router.get('/recipes/:id', async (req, res, next) => {
     try{
         let recipesTotal = await getAllRecipes();
         if(idReceta){
-        let recipeById = await recipesTotal.filter(r=> r.id == idReceta)
+        let recipeById = recipesTotal.filter(r=> r.id == idReceta)
         recipeById.length ?
         res.status(200).send(recipeById) :
         res.status(404).send('No se encontró esa receta')
@@ -124,7 +128,7 @@ router.get('/types', async (req, res, next) => {
 router.post('/recipe', async (req, res) => {
     // console.log('holaaaa')
     console.log(req.body);
-    const { title, summary, image, aggregateLikes, healthScore, analizedInstructions, diets } = req.body.recipe;
+    const { title, summary, image, dishTypes, aggregateLikes, healthScore, analizedInstructions, diets } = req.body.recipe;
     // if (req.body.diets) {
     //     const diets = req.body.diets
 
@@ -137,10 +141,18 @@ router.post('/recipe', async (req, res) => {
         summary,
         image,    
         aggregateLikes,
+        dishTypes,
         healthScore,
         analizedInstructions
 
     });
+
+    console.log(dishTypes)
+
+// dishTypes.forEach(async element => {
+//     let dishDb = await DishTypes?.findAll({where: {name: element}})
+//     recipeCreated.addDishTypes(dishDb)
+// });
 
 diets.forEach(async element => {
     let dietDb = await Diet?.findAll({ where: {name: element} })

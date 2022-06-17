@@ -26,7 +26,7 @@ export function Resultado(props) {
             <img src={props.image} alt="" className="resultPicture"/>
             </div>
             <div className="resultDescriptionContainer">
-                <Link to={`/detail/${props.id}`} className="resultTitle"><h1>{props.title}</h1> <h3> {props.diets} </h3></Link>
+                <Link to={`/detail/${props.id}`} className="resultTitle"><h1>{props.title}</h1> </Link>
             </div>
             </div> 
     )

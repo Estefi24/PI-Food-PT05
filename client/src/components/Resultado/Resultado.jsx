@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import '../carpeta.css';
 //Importar link
 import { Link } from "react-router-dom";
 
@@ -12,14 +13,17 @@ export function Resultado(props) {
 
     return (
         
-            <div className="resultContainer" key={props.id}>
-            <div className="resultPictureContainer">
+        <Link to={`/detail/${props.id}`} key={props.id} className="recipe-item">
             <img src={props.image} alt="" className="resultPicture"/>
+            <div className="recipe-description">
+                <span className="recipe-title">{props.title}</span> 
+                    <p className="recipe-healthScore">Score: {props.healthScore}</p>
+                            <ul className='grid-list'>{props.diets?.map((type , index=0) => {
+                            return <li key={index}>{type}</li>
+                        })}</ul>
             </div>
-            <div className="resultDescriptionContainer">
-                <Link to={`/detail/${props.id}`} className="resultTitle"><h1>{props.title}</h1> <h3>{props.diets?.join(', ')}</h3> </Link>
-            </div>
-            </div> 
+        </Link>
+
     )
 };
 

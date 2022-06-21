@@ -18,7 +18,7 @@ const apiInfo = await apiUrl.data.results.map(d => {
             diets: d.diets?.map(element => element),          
             summary: d.summary,  
             aggregateLikes: d.aggregateLikes,          
-            healthScore: d.healthScore,   
+            healthScore: d.healthScore,  
             steps: d.analyzedInstructions[0]?.steps.map(s=>s.step).join("")
         };
     });
@@ -43,11 +43,9 @@ const dbInfo= await db?.map(d => {
         summary: d.summary,
         aggregateLikes: d.aggregateLikes,
         healthScore: d.healthScore,
-        analizedInstructions: d.analizedInstructions
+        steps: d.steps
     };
 });
-// console.log(dbInfo.diets.join( ' ,'))
-// console.log('viene del back')
         return dbInfo;
 };
 
@@ -74,15 +72,6 @@ router.get('/recipes', async (req, res, next) => {
         next(err)
     }
 });
-
-// router.get('/recipes/detail:id', async (req, res, next) => {
-//     axios.get(`https://api.spoonacular.com/recipes/${req.params.id}/information?apiKey=${apiKey}`).then((response) => {
-//     console.log(response.data);
-
-//     res.json(response.data);
-//         })
-// });
-
 
 router.get('/recipes/:id', async (req, res, next) => {
     const idReceta = req.params.id;
@@ -111,7 +100,7 @@ router.get('/types', async (req, res, next) => {
 
 router.post('/recipe', async (req, res) => {
     
-    const { title, summary, image, dishTypes, aggregateLikes, healthScore, analizedInstructions, diets } = req.body;
+    const { title, summary, image, dishTypes, aggregateLikes, healthScore, steps, diets } = req.body;
 
     const recipeCreated = await Recipe.create({
         title,
@@ -120,18 +109,15 @@ router.post('/recipe', async (req, res) => {
         aggregateLikes,
         dishTypes,
         healthScore,
-        analizedInstructions
+        steps
 
     });
 
-    console.log(diets)
 diets.forEach(async element => {
     let dietDb = await Diet?.findOne({ where: {name: element} })
     recipeCreated.addDiet(dietDb)
     
 });
-    console.log(recipeCreated.dataValues)
-    // res.status(200).send('Receta creada exitosamente')
     res.json(recipeCreated)
 });
 

@@ -14,11 +14,8 @@ export function addSearch(search){
 
    //Filtros
     if(search){
-
-    console.log('Deberia estar el searchHealthScore' , search.orderByhealthScore);
-
-    if(search.search.lenght !== 0){
-      recipesReturn = res.data.filter(result =>  result.title.toLowerCase().includes(search.search.toLowerCase()));
+    if(search.search.length !== 0){
+      recipesReturn = res.data.filter(result => result.title.toLowerCase().includes(search.search.toLowerCase()));
     } else{
       recipesReturn = res.data;
     }
@@ -33,10 +30,8 @@ export function addSearch(search){
     //------------------------------------------------------------------
     if(search.orderByAlphabetical !== 'none'){
       if(search.orderByAlphabetical === 'ascend'){
-        console.log('Ordenando por ascendente' ,console.log(search.orderByAlphabetical))
         recipesReturn = recipesReturn.sort((a, b) => a.title.localeCompare(b.title));
       }else{
-        console.log('Ordenando por descendente' ,console.log(search.orderByAlphabetical))
             recipesReturn = recipesReturn.sort((a, b) => b.title.localeCompare(a.title));
           }
         }

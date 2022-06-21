@@ -1,121 +1,149 @@
-.create  {
-    margin: 0;
-    background-color: rgb(54, 6, 38);
-    background-image: url('https://images.unsplash.com/photo-1498522271744-cdd435c13f24?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1508&q=80');
+.form-container {
+    box-shadow: 1px 1px 4px 2px rgb(0 0 0 / 20%);
+    background: #fff;
+    border-radius: 10px;
+    margin: 1rem;
+    background-image: url('https://img.freepik.com/vector-gratis/fondo-gris-textura-madera_1048-4757.jpg?w=2000');
+}
+
+.form-container h1 {
+    text-align: center;
+    color: #333;
+    font-size: 33px;
+    margin-top: 1.2rem;
+}
+
+.form-recipe {
+    display: block
+}
+
+fieldset {
+    margin: 2rem 0;
+    padding: 1rem 1rem;
+    border: none;
+} */
+
+  /* labels */
+
+legend {
+    font-size: 1.25rem;
+    padding: 0 .25rem;
+    color: #999;
+    margin-block: 1rem;
+}
+
+label {
+    display: block;
+    margin-block: 1rem .5rem;
+    font-weight: 600;
+}
+
+label:first-of-type {
+    margin-top: 0;
+}
+
+  /* Inputs and textarea */
+
+input {
+    padding: .5rem;
+    border: 1px solid #999;
+}
+
+input[type='email'],
+input[type='text'] {
     width: 100%;
-    height: auto;
-    position: absolute;    
-    background-position: left; 
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-}
-.formDish {
-    background-color: gainsboro;
-    font-size: 12px;
-    color: black;
-    max-lines: 10px;
 }
 
-.checkboxContainer {
-    max-width: 200px;
-    background-color: gainsboro;
-}
-.typesInput {color:black;
-    font-size: 12px;
-
+textarea {
+    min-height: 8rem;
+    min-width: 100%;
+    padding: .5rem;
+    border: 1px solid #999;
 }
 
-.create button{
-    background-color:  rgba(240, 228, 236, 0.712);
-    border-bottom-left-radius: 3px;
-    border-top-right-radius: 3px;
-    padding: 10px;
-    background-color: rgb(73, 77, 50); 
-    color:white;
+  /* radio buttons and checkboxes */
+
+.checks {
+    margin-block: 1.5rem;
+    display: block;
+    border: 1px solid rgb(7, 7, 7);
+    padding: 15px;
 }
 
-.create button:hover{
-    background-color: rgb(126, 123, 126);
-    color:white;
-    background-color:rgb(85, 63, 85);
-    color:white;
+.checks label {
+    font-weight: 400;
 }
 
-.buttonHome {
-    margin-top: 2%;
-    margin-left: 0%;
-}
-
-.create h1{
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-    font-size: 50px;
-    font-style:italic;
-    font-family: 'Times New Roman', Times, serif;
-    /* background-image: url('https://images.unsplash.com/photo-1495195129352-aeb325a55b65?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1510&q=80'); */
-    /* background-image: url('https://images.unsplash.com/photo-1498522271744-cdd435c13f24?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1508&q=80'); */
-    background-color: rgba(197, 185, 185, 0.8);
-    padding: 1%;
-}
-
-.create form{
-    margin-left: 35%;
-    margin-right: 35%;
-    padding: 30px;
-    font-size: 30px; 
-    /* background-image: url('https://images.unsplash.com/photo-1498522271744-cdd435c13f24?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1508&q=80'); */
-    color: white;
-    background-position: center center;
-}
-.inputImageBox {
-    color: black
-}
-
-.formulario div{
-    margin-bottom: 2%;
-}
-
-.formulario p{
-    color:rgb(86, 248, 46);
-}
-
-.instruction{
-    width: 400px;
-}
-
-.diets{
-    justify-content: flex-start;
+input[type='checkbox']+label {
+    display: inline-block;
+    padding-top: 0;
+    margin-top: 0;
 } 
-.diets li {
-    float: left;
-    justify-content: flex-start;
-    background-color: rgba(197, 185, 185, 0.8);
+
+  /* Submit button*/
+
+.submit-btn {
+    padding: .5rem 1rem;
+    border-radius: 6px;
+    background-color: #333;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    margin-block: 2rem 1rem;
+    width: 200px;
 }
 
-.diets button{
-    background-color: rgb(248, 46, 46);
-    background-color: rgb(120, 189, 52);
-    border-color: rgb(66, 161, 66);
-    border-bottom-left-radius: 50px;
-    border-top-right-radius: 50px;
-    border-radius: 100%;
-    font-size: 10px;
-    padding: 20px;
-    margin: 50px;
+.submit-btn:hover {
+    background-color: white;
+    color: #333;
+    border: 1px solid #333;
 }
 
-.diets button:hover{
-    background-color: rgb(248, 46, 46);
-    border-color: firebrick;
+.form-container p {
+    margin-top: 24px;
+    font-weight: 600;
 }
 
-.buttonCreate{
-    float: left;       
-    margin-left: 50px;
-    margin-right: 20px;
-    margin-block-start: 30px;
+@media screen and (min-width: 992px) {
+    .form-recipe {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+
+    fieldset {
+    border: 1px solid #333;
+    border-radius: 6px;
+    min-width: 200px;
+    padding-inline: 2rem;
+    }
+
+    .form-container {
+    margin: 0;
+    }
+
+    .form-container h1 {
+        font-size: 40px;
+        margin-top: 0;
+    }
+
+    input[type='email'],
+    input[type='text'] {
+    width: 100%;
+    color: #000;
+    }
+
+    textarea {
+    min-width: 100%;
+    }
+
+    .checks {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 10px;
+    }
 }
 
 .addRecipeFormValidationErrorInput{
@@ -123,13 +151,10 @@
     opacity: 65%;
     color: white;
     animation-name: addRecipeFormValidationErrorInputAnimation;
-    animation-duration: 0.5s;
+    /* animation-duration: 0.5s; */
 }
 @keyframes addRecipeFormValidationErrorInputAnimation{
     0% {margin-left: calc(-100px);}
     50% {margin-left: calc(0px);}
     100% {margin-left: calc(100px);}
 }
-/* .buttonSave{
-    margin-block-start: 20px;
-} */

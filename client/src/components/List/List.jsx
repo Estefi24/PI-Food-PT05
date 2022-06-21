@@ -7,6 +7,8 @@ import {connect , useDispatch, useSelector} from 'react-redux';
 import { addSearch } from '../../actions';
 import Resultado from '../Resultado/Resultado';
 import Paginado from '../Paginado/Paginado';
+import img from '../../img/error.jpg'
+import '../carpeta.css';
 
 
 export function List(props) {
@@ -19,6 +21,7 @@ export function List(props) {
     const indexOfFirstOfRecipe = indexOfLastOfRecipe - recipesPerPage;
     const currentRecipes  = allRecipes.slice(indexOfFirstOfRecipe , indexOfLastOfRecipe);
 
+    
     const paginado = (pageNumber) => {
         setCurrentPage(pageNumber);
     }
@@ -37,19 +40,8 @@ export function List(props) {
         
     }, []);
 
-
-console.log(currentRecipes)
     return (
-        <div>
-            <div>
-                <Paginado
-                recipesPerPage={recipesPerPage}
-                allRecipes={allRecipes.length}
-                paginado={paginado}
-                previous={previous}
-                next={next}>
-                </Paginado>
-
+            <>
                 {currentRecipes.length ? currentRecipes?.map(recipe => {
                     return (
                         <Resultado
@@ -57,19 +49,29 @@ console.log(currentRecipes)
                         title={recipe.title}
                         image={recipe.image}
                         diets={recipe.diets}
+                        healthScore={recipe.healthScore}
                         id={recipe.id}></Resultado>
-                    )
+                        
+                    )                   
                 }) :
-                <span>Recipe No Found</span>
+                <img width={450} src={img} alt="not found" />
                 }
-               
-            </div>
-        </div>
-    )
+                {currentRecipes.length ? 
+                <Paginado
+                    recipesPerPage={recipesPerPage}
+                    allRecipes={allRecipes.length}
+                    paginado={paginado}
+                    previous={previous}
+                    next={next}>
+                </Paginado> :
+                <div></div>
+                }
+
+            </>)
 };
 
 function mapStateToProps(state) {
-    console.log('Maps state to props' , state)
+
     return {
        //Asi es como queremos recibir los elementos del store
     recipes: state.recipes

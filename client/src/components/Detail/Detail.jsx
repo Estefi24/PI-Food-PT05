@@ -6,12 +6,13 @@ import { Link } from 'react-router-dom';
 import { useState , useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from 'axios';
+import '../carpeta.css';
 
 export default function Detail(props) {
 
     const { id } = useParams();
   //Establecer un estado (variable , funcion seteadora)
-    const [recipe , setRecipe] = useState({id: id , title: '' , diets: [] , image: '' , dishTypes: [] , summary: '', healtScore: '' , steps: '', analizedInstructions: ''});
+    const [recipe , setRecipe] = useState({id: id , title: '' , diets: [] , image: '' , dishTypes: [] , summary: '', healthScore: '' , steps: '', analizedInstructions: ''});
 
     useEffect(() => {
         axios.get(`/food/recipes/${id}`).then(res => {    
@@ -25,7 +26,6 @@ export default function Detail(props) {
                     summary: res.data[0].summary,
                     healthScore: res.data[0].healthScore,
                     aggregateLikes: res.data[0].aggregateLikes,
-                    analizedInstructions: res.data[0].analizedInstructions,
                     steps: res.data[0].steps
 
                 }
@@ -34,64 +34,52 @@ export default function Detail(props) {
         )
     }, []);
 
-    if (id.length === 36) {
-        return (
-            <div className='detail'>
-            <div className='buttonHome' >
-            <Link to='/Home' className='go back to home'><button>Go back to Home</button></Link>
-            </div>
-        <div className='detailContainer'>
-            <h1>Tittle:</h1>
-            <h2>{recipe.title}</h2>
-            <img src={recipe.image} alt="" className="detailPicture"/>
-            <h3>TypeDiets:</h3>
-            <p>{recipe.diets.join(' ,')}</p>
-            {/* <p>{recipe.diets.map( (type , index=0) => {
-                return <span key={index}> | {type.name}</span>
-                })}</p> */}
-            <h3>DishTypes:</h3>
-            {recipe.dishTypes.map( (type , index=0) => {
-                return <span key={index}> | {type}</span>
-                })}
-            <h3>HealthScore:</h3>
-            <p>{recipe.healthScore}</p>
-            <h3>AggregateLikes:</h3>
-            <p>{recipe.aggregateLikes}</p>
-            <h3>Summary:</h3>
-            <p>{recipe.summary}</p>
-            <h3>Instructions:</h3>
-            <p>{recipe.analizedInstructions}</p>
-        </div>
-        </div>
-        )
-    }
 
     return (
-    <div className='detail'>
+    <div className='container'>
             <div className='buttonHome' >
-            <Link to='/Home' className='go back to home'><button>Go back to Home</button></Link>
+            <Link to='/Home' className='btn'>◀ Back to Home</Link>
             </div>
-        <div className='detailContainer'>
-            <h1>Tittle:</h1>
-            <h2>{recipe.title}</h2>
-            <img src={recipe.image} alt="" className="detailPicture"/>
-            <h3>TypeDiets:</h3>
-            <p>{recipe.diets.map( (type , index=0) => {
-                return <span key={index}> | {type}</span>
-                })}</p>
-            <h3>DishTypes:</h3>
-            {recipe.dishTypes.map( (type , index=0) => {
-                return <span key={index}> | {type}</span>
-                })}
-            <h3>HealthScore:</h3>
-            <p>{recipe.healthScore}</p>
-            <h3>AggregateLikes:</h3>
-            <p>{recipe.aggregateLikes}</p>
-            <h3>Summary:</h3>
-            <p>{recipe.summary.replace(/<[^>]*>?/g, '')}</p>
-            <h3>Instructions:</h3>
-            <p>{recipe.steps.replace(/<[^>]*>?/g, '')}</p>
-        </div>
+        <article className='detailContainer'>
+            <div className="card-header">
+                <img src={recipe.image} alt="" className="detailPicture"/>
+                <h2>{recipe.title}</h2>
+            </div>
+
+            <div className="card-info">
+                <div className="type-diet">
+                    <h3>TypeDiets</h3>
+                    <ul className="grid-list">
+                        {recipe.diets.map( (type , index=0) => {
+                            return <li key={index}>{type}</li>
+                        })}
+                    </ul>
+                </div>
+
+                <div className="dish-types">
+                    <h3>DishTypes:</h3>
+                    <ul className="grid-list">
+                        {recipe.dishTypes.map( (type , index=0) => {
+                            return <li key={index}>{type}</li>
+                        })}
+                    </ul>
+                </div>
+
+                <h3>HealthScore <span>{recipe.healthScore}</span></h3>
+                <h3>AggregateLikes <span>{recipe.aggregateLikes}</span></h3>
+            </div>
+
+           <hr className="line" />
+
+           <div className="card-description">
+                <h3>Summary:</h3>
+                <p>{recipe.summary}</p>
+
+                <h3>Instructions:</h3>
+                <p>{recipe.steps}</p>
+           </div>
+
+        </article>
     </div>
 )
 }

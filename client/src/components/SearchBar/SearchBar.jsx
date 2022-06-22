@@ -11,11 +11,13 @@ export class SearchBar extends Component{
 
         this.state = {
             search: '',
+            orderByRecipe: 'all',
             typeDiet: 'all',
             orderByAlphabetical: 'none',
             orderByhealthScore: 'none',
-
+            // selectOptions: [],
         }
+
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.viewAllRecipes = this.viewAllRecipes.bind(this);
@@ -28,9 +30,11 @@ export class SearchBar extends Component{
         this.props.addSearch(
             {
             search:'',
-            typeDiet:'all' , 
+            orderByRecipe:'all',
+            typeDiet: 'all' , 
             orderByAlphabetical:'none',
-            orderByhealthScore: 'none'
+            orderByhealthScore: 'none',
+            // selectOptions: [],
             }
         );
     }
@@ -40,6 +44,8 @@ export class SearchBar extends Component{
         event.preventDefault()
         this.props.addSearch({...this.state, [event.target.name]: event.target.value});
         this.setState({...this.state, [event.target.name]: event.target.value});
+    //     let value= Array.from(event.target.selectedOptions, option => option.value);
+    //    console.log(value)
     }
 
     handleSubmit(event){
@@ -47,6 +53,7 @@ export class SearchBar extends Component{
       this.props.addSearch(
             {
             search:this.state.search ,
+            orderByRecipe:this.state.orderByRecipe,
             typeDiet:this.state.typeDiet , 
             orderByAlphabetical: this.state.orderByAlphabetical,
             orderByhealthScore: this.state.orderByhealthScore
@@ -72,7 +79,12 @@ export class SearchBar extends Component{
                     </button>
                 </div>
                 <div className='filter-row-sort'>
-                    <select name='typeDiet' id='typeDiet' onChange={this.handleChange} value= {this.state.typeDiet} >
+                <select name='orderByRecipe' id='orderByRecipe' onChange={this.handleChange} value= {this.state.orderByRecipe}>
+                        <option value='all'>All Recipes </option>
+                        <option value='api'>API recipes</option>
+                        <option value='db'>DB recipes</option>
+                    </select>
+                    <select multiple={true} name='typeDiet' id='typeDiet' onChange={this.handleChange} value= {this.state.typeDiet} >
                         <option value='all'>All Diets</option>
                         <option value='gluten free'>gluten free</option>
                         <option value='dairy free'>dairy free</option>
@@ -109,14 +121,12 @@ export class SearchBar extends Component{
 
 function mapStateToProps(state) {
     return {
-       //Asi es como queremos recibir los elementos del store
         count: state.count
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-       //Las funcionalidades que este componente aplicaran al store
     addSearch: search => dispatch(addSearch(search))
     };
 }

@@ -11,7 +11,7 @@ import '../carpeta.css';
 export default function Detail(props) {
 
     const { id } = useParams();
-  //Establecer un estado (variable , funcion seteadora)
+
     const [recipe , setRecipe] = useState({id: id , title: '' , diets: [] , image: '' , dishTypes: [] , summary: '', healthScore: '' , steps: '', analizedInstructions: ''});
 
     useEffect(() => {

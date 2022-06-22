@@ -152,7 +152,7 @@
     }
 
       .filter-row-sort > * {
-        width: 30%;
+        width: 20%;
     }
 
     button {
@@ -169,6 +169,7 @@
 
     .filter-row-sort {
     display: flex;
+    align-items: center;
     }
 }
 

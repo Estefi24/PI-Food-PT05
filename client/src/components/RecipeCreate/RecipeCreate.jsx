@@ -77,8 +77,7 @@ componentDidMount = async () =>{
         alert('Congratulations you created a new recipe!');
         window.location.href= 'http://localhost:3000/Home'
 
-//---------------------------------------------------
-// Añadir al array de dietas
+
 if(this.state.recipe.glutenFree){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('gluten free') } }; }
 if(this.state.recipe.dairyFree){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('dairy free') } }; }
 if(this.state.recipe.lactoOvoVegetarian){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('lacto ovo vegetarian') } }; }

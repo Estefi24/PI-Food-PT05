@@ -1,9 +1,8 @@
 /* eslint-disable no-self-assign */
 import axios from  'axios';
 
-export function addSearch(search){
 
-  
+export function addSearch(search){
 
   return function(dispatch) {
 
@@ -12,7 +11,6 @@ export function addSearch(search){
       let recipesReturn = [];
 
 
-   //Filtros
     if(search){
     if(search.search.length !== 0){
       recipesReturn = res.data.filter(result => result.title.toLowerCase().includes(search.search.toLowerCase()));
@@ -20,14 +18,25 @@ export function addSearch(search){
       recipesReturn = res.data;
     }
 
-    //Si es distinto a all , filtra por dieta
+      
+      if(search.orderByRecipe !== 'all'){
+        if(search.orderByRecipe === 'api') {
+          recipesReturn = recipesReturn.filter(r => r.id.toString().length === 6)
+        }else{
+          recipesReturn = recipesReturn.filter(r => r.id.toString().length === 36)
+        }
+      }else {
+        recipesReturn= recipesReturn;
+      }
+
+    
     if(search.typeDiet !== 'all'){
       recipesReturn = recipesReturn.filter( result => result.diets.includes(search.typeDiet) );
     }else{
       recipesReturn = recipesReturn;
     }
-    
-    //------------------------------------------------------------------
+
+
     if(search.orderByAlphabetical !== 'none'){
       if(search.orderByAlphabetical === 'ascend'){
         recipesReturn = recipesReturn.sort((a, b) => a.title.localeCompare(b.title));
@@ -36,7 +45,7 @@ export function addSearch(search){
           }
         }
 
-    //------------------------------------------------------------------
+
     if(search.orderByhealthScore !== 'none'){
       if( search.orderByhealthScore === 'min' ){
         recipesReturn.sort(function (a, b) {
@@ -46,7 +55,6 @@ export function addSearch(search){
           if (a.healthScore < b.healthScore) {
             return -1;
           }
-          // a must be equal to b
           return 0;
         })
 
@@ -58,7 +66,6 @@ export function addSearch(search){
           if (a.healthScore > b.healthScore) {
             return -1;
           }
-          // a must be equal to b
           return 0;
         })
       }
@@ -67,7 +74,7 @@ export function addSearch(search){
     recipesReturn = res.data;
   }
 
-  //Distpatch
+
   dispatch({ type: "SEARCH", payload:  recipesReturn});
   })
 

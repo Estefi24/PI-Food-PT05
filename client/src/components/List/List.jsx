@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import React, { useState , useEffect } from 'react';
-//Importar el connect
+
 import {connect , useDispatch, useSelector} from 'react-redux';
 
 import { addSearch } from '../../actions';
@@ -73,13 +73,12 @@ export function List(props) {
 function mapStateToProps(state) {
 
     return {
-       //Asi es como queremos recibir los elementos del store
     recipes: state.recipes
     };
 }
 function mapDispatchToProps(dispatch) {
     return {
-       //Las funcionalidades que este componente aplicaran al store
+        
     };
 } 
 

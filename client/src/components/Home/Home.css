@@ -1,11 +1,10 @@
 
 .filter-recipes h1 {
-    font-size: 45px;
+    font-size: 33px;
     background-image: url('https://images.unsplash.com/photo-1494859802809-d069c3b71a8a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1500&q=80');
 }
 .filter-recipes {
     text-align: center;
-    padding-top: 2rem;
     background-image: url('https://images.unsplash.com/photo-1495195129352-aeb325a55b65?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1510&q=80');
 }
 
@@ -22,12 +21,13 @@
     display: inline-block;
     margin-block: 0.5rem;
     border: 1px solid #00b4cc;
-    padding: 0.5rem;
+    padding: 0.3rem;
     background: #00b4cc;
     color: #fff;
     font-weight: 700;
     border-radius: 5px;
     margin-inline: 15px;
+    font-size: 15px;
 }
 
 .create-recipe:hover {
@@ -39,7 +39,7 @@
     display: block;
     width: 80%;
     margin: 0 auto;
-    margin-block: 1.5rem;
+    margin-block: 0.5rem;
 }
 
 .searchForm {
@@ -56,9 +56,6 @@
     position: absolute;
 }
 
-.recipes-list {
-    margin-block: 1.5rem;
-}
 
 .recipes-list > .container {
     display: flex;
@@ -79,12 +76,9 @@
     background-image: url('https://images.unsplash.com/photo-1495195129352-aeb325a55b65?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1510&q=80');
 }
 
-  .recipe-description > * {
-    padding-block: 0.5rem;
-}
 
 .recipe-title {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: #000;
     font-weight: 700;
     display: inline-block;
@@ -97,15 +91,19 @@
 
 .recipes-list .grid-list {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    text-align: left;
+    grid-template-columns: repeat(3, 1fr);
     color: #000;
-    list-style: disc;
-    padding-inline-start: 50px;
+    list-style: none;
+    align-items: center;
+    padding: 0 10px;
 }
 .recipes-list .grid-list li {
-    padding-block: 5px;
     font-size: 13px;
+    display: inline-block;
+    background: #00b4cc;
+    margin: 3px 4px;
+    padding: 3px 5px;
+    border-radius: 10px;
 }
 
 .pagination a {
@@ -129,6 +127,9 @@
 }
 
 @media screen and (min-width: 992px) {
+    .recipes-list .grid-list {
+        display: block;
+    }
     .filter-row-search {
     margin-block: 1.5rem;
     }
@@ -174,9 +175,7 @@
 }
 
 @media screen and (min-width: 1200px) {
-    .recipe-description {
-        margin-top: 30px;
-    }
+
     .recipe-item {
     min-height: 50px;
     }

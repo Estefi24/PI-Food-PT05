@@ -12,8 +12,8 @@ function App() {
       <Switch>
         <Route exact path='/' component={LandingPage} />
         <Route exact path='/Home' component={Home} />
-        <Route path='/detail/:id' component={Detail} />
-        <Route path='/recipe' component={RecipeCreate} />
+        <Route exact path='/detail/:id' component={Detail} />
+        <Route exact path='/recipe' component={RecipeCreate} />
       </Switch>
     </BrowserRouter>
   );

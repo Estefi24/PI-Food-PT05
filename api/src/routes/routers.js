@@ -43,7 +43,8 @@ const dbInfo= await db?.map(d => {
         summary: d.summary,
         aggregateLikes: d.aggregateLikes,
         healthScore: d.healthScore,
-        steps: d.steps
+        steps: d.steps,
+        createdDb: d.createdDb
     };
 });
         return dbInfo;

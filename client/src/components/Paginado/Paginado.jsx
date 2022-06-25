@@ -8,17 +8,19 @@ import '../carpeta.css';
 export default function Paginado ({recipesPerPage, allRecipes, paginado, previous, next}) {
     
     const pageNumbers = [];
-    const [active, setActive] = useState(0)
-        
-    for (let i = 1; i <= Math.ceil(allRecipes/recipesPerPage); i++) {
+    const [active, setActive] = useState(1)
+    let allPage = Math.ceil(allRecipes/recipesPerPage) 
+
+    for (let i = 1; i <= allPage; i++) {
         pageNumbers.push(i)
     };    
-    
+
+
     return(
 
     <div className="pagination-container">
         <div className="pagination">
-        <a href="#" className='btn-page' onClick={() => previous()}>Prev</a>
+        <a href="#" className='btn-page' onClick={() => previous(setActive)}>Prev</a>
             {pageNumbers && pageNumbers.map((number) => (
         <a href='#' className= {number === active? 'active' : ''}
         
@@ -26,7 +28,7 @@ export default function Paginado ({recipesPerPage, allRecipes, paginado, previou
             setActive(number)
             paginado(number)}} key={number} >{number}</a>
             ))}
-        <a href='#' className='btn-page' onClick={() => next()}>Next</a> 
+        <a href='#' className='btn-page' onClick={() => next(setActive, allPage)}>Next</a> 
         </div>
     </div> 
     )

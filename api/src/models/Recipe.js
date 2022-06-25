@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
- 
+
   sequelize.define('recipe', {
     id: {
       type: DataTypes.UUID,
@@ -29,7 +29,8 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING
     },
     image:{
-      type:DataTypes.TEXT
+      type:DataTypes.TEXT,
+      defaultValue: 'https://st.depositphotos.com/2786775/3990/v/950/depositphotos_39907919-stock-illustration-vegan-food-seamless-pattern.jpg'
     },
     createdDb:{
       type: DataTypes.BOOLEAN,

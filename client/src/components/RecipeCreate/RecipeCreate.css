@@ -46,7 +46,30 @@ label:first-of-type {
 
 input {
     padding: .5rem;
-    border: 1px solid #999;
+    border: 1px solid #767676;
+}
+filter-row-search > input {
+    border-top: 1px solid #767676;
+border-left: 1px solid #767676;
+border-bottom: 1px solid #767676;
+border-right: none;
+}
+
+.form-container .form label[for=title]::after,
+.form-container .form label[for=summary]::after {
+    content: '*';
+    color: red;
+    font-size: 22px;
+}
+
+.mandatory {
+    color: red;
+    font-size: 14px;
+}
+
+.mandatory>span {
+    font-size: 25px;
+    vertical-align: middle;
 }
 
 input[type='email'],
@@ -130,7 +153,8 @@ input[type='checkbox']+label {
     }
 
     input[type='email'],
-    input[type='text'] {
+    input[type='text'],
+    input[type='url'] {
     width: 100%;
     color: #000;
     }

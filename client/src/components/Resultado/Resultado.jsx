@@ -17,7 +17,7 @@ export function Resultado(props) {
             <img src={props.image} alt="" className="resultPicture"/>
             <div className="recipe-description">
                 <span className="recipe-title">{props.title}</span> 
-                    <p className="recipe-healthScore">Score: {props.healthScore}</p>
+                    {/* <p className="recipe-healthScore">Score: {props.healthScore}</p> */}
                             <ul className='grid-list'>{props.diets?.map((type , index=0) => {
                             return <li key={index}>{type}</li>
                         })}</ul>

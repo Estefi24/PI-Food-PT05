@@ -12,17 +12,17 @@ class RecipeCreate extends React.Component {
         this.state = {recipe: {
             title: '',
             summary: '',
-            image: '',
+            // image: '',
             dishTypes: [],
-            aggregateLikes: '',
-            healthScore: '',
+            aggregateLikes: 0,
+            healthScore: 0,
             steps: '',
             diets: []
         },
         allDishTypes: [],
         allDiets: [],
         
-        validation: true       
+        validation: false      
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -74,26 +74,21 @@ componentDidMount = async () =>{
 
     async handleSubmit(e) {
         e.preventDefault();
+        if (this.state.recipe.title.length ===0){
+            alert('you must complete the title box');
+            return;
+        } if (this.state.recipe.summary.length ===0){
+            alert('you must complete the summary box');    
+            return;
+        }else{
         alert('Congratulations you created a new recipe!');
         window.location.href= 'http://localhost:3000/Home'
-
-
-if(this.state.recipe.glutenFree){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('gluten free') } }; }
-if(this.state.recipe.dairyFree){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('dairy free') } }; }
-if(this.state.recipe.lactoOvoVegetarian){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('lacto ovo vegetarian') } }; }
-if(this.state.recipe.vegan){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('vegan') } }; }
-if(this.state.recipe.paleolithic){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('paleolithic') } }; }
-if(this.state.recipe.primal){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('primal') } }; }
-if(this.state.recipe.whole30){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('whole 30') } }; }
-if(this.state.recipe.pescatarian){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('pescatarian') } }; }
-if(this.state.recipe.ketogenic){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('ketogenic') } }; }
-if(this.state.recipe.fodmapFriendly){ this.setState= {...this.state.recipe, recipe:{ diets: this.state.recipe.diets.push('fodmap friendly') } }; }
-
+        };
 
 if (this.state.validation){
         let dietas = this.state.recipe.diets
     
-    const response= await axios.post('/food/recipe', {
+    const response= await axios.post('http://localhost:3001/food/recipe', {
         title: this.state.recipe.title,
         summary: this.state.recipe.summary,
         image: this.state.recipe.image,
@@ -169,7 +164,7 @@ if (this.state.validation){
                             <label htmlFor="steps">Instructions</label>
                             <textarea type="text" name="steps" onChange={this.handleChange} value={this.state.recipe.steps}></textarea>
                         </div>
-                        
+                        <p class="mandatory"><span>*</span> mandatory fields</p>
                         <input className='submit-btn' type="submit" value="Create Recipe" />
                     </fieldset>
                 </form>

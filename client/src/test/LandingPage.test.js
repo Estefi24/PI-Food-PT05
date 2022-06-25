@@ -8,11 +8,11 @@ describe('LandingPage',()=>{
     it("should have an title Welcome",()=>{
         const wrapper = shallow(<LandingPage/>)
         const title = wrapper.find('div h1')
-        expect(title.text()).toBe('W E L C O M E !!!')
+        expect(title.text()).toBe('WELCOME!!!')
     })
     it("should have a button Click Here",()=>{
         const wrapper = shallow(<LandingPage/>)
         const button = wrapper.find('div Link button')
-        expect(button.text()).toBe("CLICK HERE")
+        expect(button.text()).toBe("Click here")
     })
 })

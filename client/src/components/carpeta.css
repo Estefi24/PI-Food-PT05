@@ -23,6 +23,17 @@ figure,
 picture {
 margin: 0;
 }
+.container-pagination {
+    display: flex;
+    flex-direction: column;
+}
+
+.container-cards {
+display: flex;
+flex-direction:row;
+flex-wrap: wrap;
+justify-content: space-around;
+}
 
 img {
 max-width: 100%;
@@ -35,21 +46,19 @@ text-decoration: none;
 input,
 select {
 padding: 5px;
-font-size: 1.3rem;
-border-radius: 5px;
+font-size: 0.8rem;
+font-weight: 700;
 background: transparent;
 }
-form {
-margin-block: 2rem;
-}
+
 
 img {
     width: 100%;
 }
 
 .btn {
-    width: 40px;
-    height: 40px;
+    width: 33px;
+    height: 33px;
     border: 1px solid #00b4cc;
     background: #00b4cc;
     text-align: center;
@@ -61,7 +70,7 @@ img {
 
 @media screen and (min-width: 992px) {
     .container {
-    max-width: 1160px;
+    max-width: 1000px;
     margin: 0 auto;
     }
     button {

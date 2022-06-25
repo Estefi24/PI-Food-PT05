@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState , useEffect } from 'react';
 
-import {connect , useDispatch, useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import { addSearch } from '../../actions';
 import Resultado from '../Resultado/Resultado';
@@ -11,7 +11,7 @@ import img from '../../img/error.jpg'
 import '../carpeta.css';
 
 
-export function List(props) {
+export function List() {
     const [recipes, setRecipes] = useState();
     const dispatch = useDispatch();
     const allRecipes = useSelector( (state) =>  state.recipes  );
@@ -21,27 +21,32 @@ export function List(props) {
     const indexOfFirstOfRecipe = indexOfLastOfRecipe - recipesPerPage;
     const currentRecipes  = allRecipes.slice(indexOfFirstOfRecipe , indexOfLastOfRecipe);
 
-    
     const paginado = (pageNumber) => {
         setCurrentPage(pageNumber);
     }
     
-	const previous = function () {
+	const previous = function (setActive) {
+        if(currentPage > 1){
         setCurrentPage(currentPage - 1);
+        setActive(currentPage - 1)
+        }  
 	};
 
-    const next = function () {
+    const next = function (setActive, allPage) {
+        if(currentPage < allPage) {
         setCurrentPage(currentPage + 1);
+        setActive(currentPage + 1)
+        }
 	};
 
 
     useEffect(() => {
-        dispatch(addSearch())
-        
+        dispatch(addSearch())      
     }, []);
 
     return (
-            <>
+            <div className= 'container-pagination' >
+                <div className= 'container-cards'>
                 {currentRecipes.length ? currentRecipes?.map(recipe => {
                     return (
                         <Resultado
@@ -49,13 +54,13 @@ export function List(props) {
                         title={recipe.title}
                         image={recipe.image}
                         diets={recipe.diets}
-                        healthScore={recipe.healthScore}
-                        id={recipe.id}></Resultado>
-                        
+                        // healthScore={recipe.healthScore}
+                        id={recipe.id}></Resultado>                        
                     )                   
                 }) :
                 <img width={450} src={img} alt="not found" />
                 }
+                </div>
                 {currentRecipes.length ? 
                 <Paginado
                     recipesPerPage={recipesPerPage}
@@ -66,24 +71,9 @@ export function List(props) {
                 </Paginado> :
                 <div></div>
                 }
+                </div>
 
-            </>)
-};
-
-function mapStateToProps(state) {
-
-    return {
-    recipes: state.recipes
-    };
+            )
 }
-function mapDispatchToProps(dispatch) {
-    return {
-        
-    };
-} 
 
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(List);
+export default List;

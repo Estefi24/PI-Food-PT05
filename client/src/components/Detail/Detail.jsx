@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import axios from 'axios';
 import '../carpeta.css';
 
-export default function Detail(props) {
+export default function Detail() {
 
     const { id } = useParams();
 
@@ -69,15 +69,15 @@ export default function Detail(props) {
                 <h3>AggregateLikes <span>{recipe.aggregateLikes}</span></h3>
             </div>
 
-           <hr className="line" />
+        <hr className="line" />
 
-           <div className="card-description">
+        <div className="card-description">
                 <h3>Summary:</h3>
                 <p>{recipe.summary}</p>
 
                 <h3>Instructions:</h3>
                 <p>{recipe.steps}</p>
-           </div>
+        </div>
 
         </article>
     </div>

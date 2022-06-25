@@ -21,9 +21,11 @@ export function addSearch(search){
       
       if(search.orderByRecipe !== 'all'){
         if(search.orderByRecipe === 'api') {
-          recipesReturn = recipesReturn.filter(r => r.id.toString().length === 6)
-        }else{
-          recipesReturn = recipesReturn.filter(r => r.id.toString().length === 36)
+          recipesReturn = recipesReturn.filter(r => !r.createdDb)
+        }else{  recipesReturn = recipesReturn.filter(r => r.createdDb)  
+        //   recipesReturn = recipesReturn.filter(r => r.id.toString().length === 6)
+        // }else{
+        //   recipesReturn = recipesReturn.filter(r => r.id.toString().length === 36)
         }
       }else {
         recipesReturn= recipesReturn;

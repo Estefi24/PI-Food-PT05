@@ -50,7 +50,7 @@ export default function Detail() {
                 <div className="type-diet">
                     <h3>TypeDiets</h3>
                     <ul className="grid-list">
-                        {recipe.diets.map( (type , index=0) => {
+                        {recipe.diets.map( (type , index) => {
                             return <li key={index}>{type}</li>
                         })}
                     </ul>
@@ -59,7 +59,7 @@ export default function Detail() {
                 <div className="dish-types">
                     <h3>DishTypes:</h3>
                     <ul className="grid-list">
-                        {recipe.dishTypes.map( (type , index=0) => {
+                        {recipe.dishTypes.map( (type , index) => {
                             return <li key={index}>{type}</li>
                         })}
                     </ul>

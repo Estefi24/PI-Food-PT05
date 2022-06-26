@@ -47,9 +47,10 @@ label:first-of-type {
 input {
     padding: .5rem;
     border: 1px solid #767676;
+    border-radius: 5px;
 }
 filter-row-search > input {
-    border-top: 1px solid #767676;
+border-top: 1px solid #767676;
 border-left: 1px solid #767676;
 border-bottom: 1px solid #767676;
 border-right: none;
@@ -72,7 +73,6 @@ border-right: none;
     vertical-align: middle;
 }
 
-input[type='email'],
 input[type='text'] {
     width: 100%;
 }
@@ -152,7 +152,6 @@ input[type='checkbox']+label {
         margin-top: 0;
     }
 
-    input[type='email'],
     input[type='text'],
     input[type='url'] {
     width: 100%;

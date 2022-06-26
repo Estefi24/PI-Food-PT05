@@ -35,6 +35,10 @@
     color: #00b4cc;
 }
 
+::placeholder {
+    color: #000;
+}
+
   .filter-row-sort > * {
     display: block;
     width: 80%;
@@ -54,6 +58,7 @@
 
 .btn-search {
     position: absolute;
+    right: 0;
 }
 
 

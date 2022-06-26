@@ -18,7 +18,7 @@ export function Resultado(props) {
             <div className="recipe-description">
                 <span className="recipe-title">{props.title}</span> 
                     {/* <p className="recipe-healthScore">Score: {props.healthScore}</p> */}
-                            <ul className='grid-list'>{props.diets?.map((type , index=0) => {
+                            <ul className='grid-list'>{props.diets?.map((type , index) => {
                             return <li key={index}>{type}</li>
                         })}</ul>
             </div>

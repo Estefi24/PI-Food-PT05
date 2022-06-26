@@ -47,10 +47,10 @@ export function List() {
     return (
             <div className= 'container-pagination' >
                 <div className= 'container-cards'>
-                {currentRecipes.length ? currentRecipes?.map(recipe => {
+                {currentRecipes.length ? currentRecipes?.map((recipe, i) => {
                     return (
                         <Resultado
-                        key={recipe.id}
+                        key={i}
                         title={recipe.title}
                         image={recipe.image}
                         diets={recipe.diets}

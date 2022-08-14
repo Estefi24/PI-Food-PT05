@@ -6,13 +6,21 @@ The Individual Project to aprove the Fullstack Web Developer bootcamp of SoyHenr
 Technologies:
 
 HTML
+
 CSS
+
 React
+
 React Router
+
 Node
+
 Express
+
 PostgreSQL
+
 Sequelize
+
 
 Como instalar el Proyecto:
 

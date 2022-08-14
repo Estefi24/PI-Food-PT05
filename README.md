@@ -7,25 +7,17 @@ Technologies:
 
 HTML
 
-
 CSS
-
 
 React
 
-
 React Router
-
-
 
 Node
 
-
 Express
 
-
 PostgreSQL
-
 
 Sequelize
 

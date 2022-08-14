@@ -21,7 +21,7 @@ The Individual Project to aprove the Fullstack Web Developer bootcamp of SoyHenr
 - Sequelize
 
 
-##Como instalar el Proyecto
+## Como instalar el Proyecto
 Primero deberas crearte una cuenta en https://spoonacular.com/ , donde te otorgarán una API KEY para usarlo mas adelante.
 Segundo deberas hacer npm install para instalar todas las dependencias, luego deberas crear un archivo .env en la carpeta api que contenga la siguiente información:
 DB_HOST=localhost

@@ -4,6 +4,7 @@ The Individual Project to aprove the Fullstack Web Developer bootcamp of SoyHenr
 
 
 Technologies:
+
 HTML
 CSS
 React
